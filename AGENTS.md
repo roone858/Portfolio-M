@@ -28,3 +28,5 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Portfolio content (profile, CV, skills, projects, experience) lives only in src/content/portfolio.ts; components read from it so updates need no component edits.
