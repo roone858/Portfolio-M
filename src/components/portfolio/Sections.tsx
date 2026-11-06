@@ -1,8 +1,8 @@
-import { Download, Layers, LayoutTemplate, Plug, Smartphone, Wrench, Mail, ArrowUpRight } from "lucide-react";
+import { Database, Download, Layers, LayoutTemplate, Plug, Server, Smartphone, Wrench, Mail, ArrowUpRight } from "lucide-react";
 import { approach, cv, cvHref, experience, profile, skillGroups } from "@/content/portfolio";
 import { GithubIcon, LinkButton, LinkedinIcon, Reveal, SectionHeader } from "./primitives";
 
-const icons = { layout: LayoutTemplate, layers: Layers, plug: Plug, wrench: Wrench, smartphone: Smartphone };
+const icons = { layout: LayoutTemplate, layers: Layers, plug: Plug, wrench: Wrench, smartphone: Smartphone, server: Server, database: Database };
 const wrap = "mx-auto max-w-6xl px-5";
 
 export function About() {

@@ -25,6 +25,8 @@ export const cvHref = cv.available
 
 export const skillGroups = [
   { title: "Frontend", icon: "layout", items: ["React", "Angular", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS"] },
+  { title: "Backend", icon: "server", items: ["Node.js", "Express.js", "NestJS", "OAuth", "Stripe"] },
+  { title: "Databases", icon: "database", items: ["MongoDB", "Mongoose", "PostgreSQL", "Prisma", "SQL"] },
   { title: "State Management", icon: "layers", items: ["Redux Toolkit"] },
   { title: "API & Integration", icon: "plug", items: ["REST APIs", "Axios", "JWT Authentication", "WebSockets"] },
   { title: "Tools", icon: "wrench", items: ["Git", "GitHub", "Vite", "npm", "VS Code", "Claude Code", "GitHub Copilot"] },
