@@ -5,16 +5,16 @@ export const profile = {
   role: "Frontend Developer",
   location: "Egypt",
   email: "mahmoudG.dev@gmail.com",
-  linkedin: "https://www.linkedin.com/in/mahmoud-gamal-rooney",
+  linkedin: "https://www.linkedin.com/in/mahmoud-gamal-abdelsalam/",
   github: "https://github.com/roone858",
   positioning:
     "I build modern, responsive, and scalable web applications with a focus on clean architecture, performance, and exceptional user experience.",
 };
 
-// CV: drop a PDF at public/cv/mahmoud-gamal-cv.pdf and set `available: true`.
-// While unavailable, the CV buttons open an email requesting the CV instead.
+// CV served from public/cv/. Set `available: false` to make the CV buttons open an email request instead.
+// A full-stack variant also lives at /cv/mahmoud-gamal-fullstack-cv.pdf (not linked from the site).
 export const cv = {
-  available: false,
+  available: true,
   url: "/cv/mahmoud-gamal-cv.pdf",
   fileName: "Mahmoud-Gamal-Frontend-Developer-CV.pdf",
 };
@@ -40,6 +40,8 @@ export type Project = {
   liveUrl?: string;
   githubUrl?: string;
   preview: "edu" | "market" | "shop";
+  /** Full-page screenshot in /public; shown instead of the illustrative preview and scrolls on hover. */
+  image?: string;
 };
 
 export const projects: Project[] = [
@@ -51,6 +53,8 @@ export const projects: Project[] = [
     tech: ["React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "REST APIs"],
     highlights: ["Educational dashboards", "Responsive interfaces", "API integration", "Authentication", "Reusable components"],
     preview: "edu",
+    image: "/projects/dolphin.webp",
+    liveUrl: "https://app.learnatdolphin.com/",
   },
   {
     name: "MITHAQ",
@@ -69,6 +73,30 @@ export const projects: Project[] = [
     tech: ["Next.js", "TypeScript", "Tailwind CSS"],
     highlights: ["Product presentation", "E-commerce UI", "Responsive layouts", "Brand-focused design"],
     preview: "shop",
+    image: "/projects/taraf.webp",
+    liveUrl: "https://tarafhome.com/",
+  },
+  {
+    name: "Sukoon",
+    category: "E-commerce",
+    description:
+      "An Arabic (RTL) e-commerce store for mattresses and bedding, with product categories, size selection, order tracking, and WhatsApp ordering.",
+    tech: ["React", "TypeScript", "NestJS", "MongoDB"],
+    highlights: ["RTL Arabic interface", "Product catalog & sizes", "Order tracking", "WhatsApp ordering", "Customer reviews & FAQ"],
+    preview: "shop",
+    image: "/projects/sukoon.webp",
+    liveUrl: "https://www.sukoony.com/",
+  },
+  {
+    name: "Tawba Islamic Center",
+    category: "Organization Website",
+    description:
+      "An Arabic (RTL) website for an Islamic center, presenting its Quran courses, services, scholars, and articles, with donation campaigns that show live funding progress.",
+    tech: [],
+    highlights: ["RTL Arabic interface", "Donation campaigns", "Services & courses", "Scholars & articles", "Responsive design"],
+    preview: "edu",
+    image: "/projects/tawba.webp",
+    liveUrl: "https://tawba.vercel.app/",
   },
 ];
 

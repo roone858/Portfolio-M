@@ -133,7 +133,7 @@ export function Approach() {
 export function Contact() {
   const links = [
     { label: "Email", value: profile.email, href: `mailto:${profile.email}`, Icon: Mail },
-    { label: "LinkedIn", value: "linkedin.com/in/mahmoud-gamal-rooney", href: profile.linkedin, Icon: LinkedinIcon },
+    { label: "LinkedIn", value: profile.linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""), href: profile.linkedin, Icon: LinkedinIcon },
     { label: "GitHub", value: "github.com/roone858", href: profile.github, Icon: GithubIcon },
   ];
   return (

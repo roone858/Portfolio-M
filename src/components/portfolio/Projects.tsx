@@ -12,7 +12,7 @@ export function Projects() {
             <Reveal key={p.name}>
               <article className="group grid overflow-hidden rounded-xl border bg-card shadow-card transition-colors hover:border-primary/30 lg:grid-cols-2">
                 <div className={`border-b bg-surface p-6 sm:p-8 lg:border-b-0 ${i % 2 ? "lg:order-2 lg:border-l" : "lg:border-r"}`}>
-                  <Preview kind={p.preview} name={p.name} />
+                  <Preview kind={p.preview} name={p.name} image={p.image} />
                 </div>
                 <div className="flex flex-col p-6 sm:p-8">
                   <p className="font-mono text-xs uppercase tracking-widest text-primary">{p.category}</p>
@@ -58,8 +58,26 @@ function ProjectLinks({ p }: { p: Project }) {
   );
 }
 
-/** Illustrative interface preview (not a screenshot). Replace with real screenshots when available. */
-function Preview({ kind, name }: { kind: Project["preview"]; name: string }) {
+/** Real full-page screenshot when `image` is set (scrolls through the page on hover); otherwise an illustrative preview. */
+function Preview({ kind, name, image }: { kind: Project["preview"]; name: string; image?: string | undefined }) {
+  if (image)
+    return (
+      <div className="overflow-hidden rounded-lg border bg-background transition-transform duration-500 group-hover:-translate-y-1">
+        <div className="flex items-center gap-1.5 border-b px-3 py-2">
+          <span className="size-2 rounded-full bg-muted-foreground/30" />
+          <span className="size-2 rounded-full bg-muted-foreground/30" />
+          <span className="size-2 rounded-full bg-muted-foreground/30" />
+          <span className="ml-3 h-4 flex-1 rounded bg-muted" />
+        </div>
+        <img
+          src={image}
+          alt={`Screenshot of the ${name} website`}
+          loading="lazy"
+          decoding="async"
+          className="aspect-[16/10] w-full object-cover object-top transition-[object-position] duration-[8000ms] ease-linear group-hover:object-bottom motion-reduce:transition-none motion-reduce:group-hover:object-top"
+        />
+      </div>
+    );
   return (
     <div role="img" aria-label={`Illustrative interface preview for ${name}`} className="overflow-hidden rounded-lg border bg-background transition-transform duration-500 group-hover:-translate-y-1">
       <div className="flex items-center gap-1.5 border-b px-3 py-2">
