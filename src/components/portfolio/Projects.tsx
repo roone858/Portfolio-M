@@ -1,77 +1,93 @@
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { projects, type Project } from "@/content/portfolio";
-import { GithubIcon, LinkButton, Reveal, SectionHeader } from "./primitives";
+import { GithubIcon, LinkButton, SectionHead } from "./primitives";
+import { projectSlug } from "@/lib/utils";
 
 export function Projects() {
   return (
-    <section id="projects" className="py-24">
-      <div className="mx-auto max-w-6xl px-5">
-        <SectionHeader eyebrow="Featured work" title="Selected projects" intro="Real products I've worked on — from learning platforms to marketplaces and e-commerce." />
-        <div className="space-y-8">
+    <section id="projects" aria-labelledby="projects-title" className="py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <SectionHead
+          id="projects-title"
+          title="Selected projects"
+          slate={`Work · ${projects.length} frames`}
+          intro="Real products I've worked on — from learning platforms to marketplaces and e-commerce."
+        />
+        <ol className="space-y-20 sm:space-y-28">
           {projects.map((p, i) => (
-            <Reveal key={p.name}>
-              <article className="group grid overflow-hidden rounded-xl border bg-card shadow-card transition-colors hover:border-primary/30 lg:grid-cols-2">
-                <div className={`border-b bg-surface p-6 sm:p-8 lg:border-b-0 ${i % 2 ? "lg:order-2 lg:border-l" : "lg:border-r"}`}>
-                  <Preview kind={p.preview} name={p.name} image={p.image} />
-                </div>
-                <div className="flex flex-col p-6 sm:p-8">
-                  <p className="font-mono text-xs uppercase tracking-widest text-primary">{p.category}</p>
-                  <h3 className="mt-2 text-2xl font-semibold">{p.name}</h3>
-                  <p className="mt-3 text-muted-foreground">{p.description}</p>
-                  <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-                    {p.highlights.map((h) => (
-                      <li key={h} className="flex items-center gap-2 text-sm"><Check className="size-4 text-primary" aria-hidden />{h}</li>
-                    ))}
-                  </ul>
-                  {p.tech.length > 0 && (
-                    <ul className="mt-6 flex flex-wrap gap-2" aria-label="Technologies">
-                      {p.tech.map((t) => (
-                        <li key={t} className="rounded border px-2 py-0.5 font-mono text-xs text-muted-foreground">{t}</li>
-                      ))}
-                    </ul>
-                  )}
-                  <div className="mt-auto flex flex-wrap gap-3 pt-7">
-                    <ProjectLinks p={p} />
-                  </div>
-                </div>
-              </article>
-            </Reveal>
+            <li key={p.name}>
+              <ProjectFrame p={p} n={i + 1} />
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
 }
 
-function ProjectLinks({ p }: { p: Project }) {
-  if (!p.liveUrl && !p.githubUrl)
-    return <span className="inline-flex min-h-11 items-center rounded-md border border-dashed px-4 text-sm text-muted-foreground">Case study coming soon</span>;
+function ProjectFrame({ p, n }: { p: Project; n: number }) {
+  const live = Boolean(p.liveUrl);
   return (
-    <>
-      {p.liveUrl && (
-        <LinkButton href={p.liveUrl} target="_blank" rel="noopener noreferrer">View Project <ArrowUpRight className="size-4" /></LinkButton>
-      )}
-      {p.githubUrl && (
-        <LinkButton href={p.githubUrl} target="_blank" rel="noopener noreferrer" variant="outline"><GithubIcon /> GitHub</LinkButton>
-      )}
-    </>
+    <article
+      id={`project-${projectSlug(p.name)}`}
+      className="group grid gap-8 lg:grid-cols-12 lg:gap-12"
+    >
+      <div className="lg:col-span-7">
+        <div className="stock rounded-[3px] px-[var(--pitch)]">
+          <div aria-hidden className="perf-x -mx-[var(--pitch)]" />
+          <Print p={p} />
+          <div aria-hidden className="perf-x -mx-[var(--pitch)]" />
+        </div>
+      </div>
+      <div className="flex flex-col lg:col-span-5 lg:pt-6">
+        <div className="flex items-center gap-3">
+          <span className="font-cond tabular text-5xl text-flag">{String(n).padStart(2, "0")}</span>
+          <span aria-hidden className="h-px flex-1 bg-border" />
+          <StatusMark live={live} />
+        </div>
+        <h3 className="font-cond mt-5 text-[clamp(2.25rem,4vw,3.25rem)]">{p.name}</h3>
+        <p className="label-cond mt-2 text-dim">{p.category}</p>
+        <p className="mt-5 text-edge">{p.description}</p>
+        <ul className="mt-6 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+          {p.highlights.map((h) => (
+            <li key={h} className="flex items-baseline gap-2.5 text-[0.9375rem] text-dim">
+              <span aria-hidden className="size-1.5 shrink-0 translate-y-[-2px] bg-flag" />
+              {h}
+            </li>
+          ))}
+        </ul>
+        {p.tech.length > 0 && (
+          <p className="label-cond mt-6 text-edge">
+            <span className="sr-only">Technologies: </span>
+            {p.tech.join(" / ")}
+          </p>
+        )}
+        <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-3 pt-8">
+          <ProjectLinks p={p} />
+        </div>
+      </div>
+    </article>
   );
 }
 
-/** Real full-page screenshot when `image` is set (scrolls through the page on hover); otherwise an illustrative preview. */
-function Preview({ kind, name, image }: { kind: Project["preview"]; name: string; image?: string | undefined }) {
-  if (image)
+/** Live = a taped band; no live link = a dashed outline. State is a mark, not a hue. */
+function StatusMark({ live }: { live: boolean }) {
+  return live ? (
+    <span className="label-cond stock rounded-[2px] px-2.5 py-1 text-[0.75rem]">Live</span>
+  ) : (
+    <span className="label-cond rounded-[2px] border border-dashed border-dim/60 px-2.5 py-1 text-[0.75rem] text-dim">
+      No print
+    </span>
+  );
+}
+
+function Print({ p }: { p: Project }) {
+  if (p.image)
     return (
-      <div className="overflow-hidden rounded-lg border bg-background transition-transform duration-500 group-hover:-translate-y-1">
-        <div className="flex items-center gap-1.5 border-b px-3 py-2">
-          <span className="size-2 rounded-full bg-muted-foreground/30" />
-          <span className="size-2 rounded-full bg-muted-foreground/30" />
-          <span className="size-2 rounded-full bg-muted-foreground/30" />
-          <span className="ml-3 h-4 flex-1 rounded bg-muted" />
-        </div>
+      <div className="my-3 overflow-hidden rounded-[2px] bg-punch p-1">
         <img
-          src={image}
-          alt={`Screenshot of the ${name} website`}
+          src={p.image}
+          alt={`Screenshot of the ${p.name} website`}
           loading="lazy"
           decoding="async"
           className="aspect-[16/10] w-full object-cover object-top transition-[object-position] duration-[8000ms] ease-linear group-hover:object-bottom motion-reduce:transition-none motion-reduce:group-hover:object-top"
@@ -79,73 +95,30 @@ function Preview({ kind, name, image }: { kind: Project["preview"]; name: string
       </div>
     );
   return (
-    <div role="img" aria-label={`Illustrative interface preview for ${name}`} className="overflow-hidden rounded-lg border bg-background transition-transform duration-500 group-hover:-translate-y-1">
-      <div className="flex items-center gap-1.5 border-b px-3 py-2">
-        <span className="size-2 rounded-full bg-muted-foreground/30" />
-        <span className="size-2 rounded-full bg-muted-foreground/30" />
-        <span className="size-2 rounded-full bg-muted-foreground/30" />
-        <span className="ml-3 h-4 flex-1 rounded bg-muted" />
-      </div>
-      <div className="aspect-[16/10] p-4">
-        {kind === "edu" && <EduUI />}
-        {kind === "market" && <MarketUI />}
-        {kind === "shop" && <ShopUI />}
+    <div className="my-3 bg-ink p-1 [clip-path:polygon(0_0,calc(100%-28px)_0,100%_28px,100%_100%,0_100%)]">
+      <div className="flex aspect-[16/10] flex-col items-center justify-center gap-2 bg-spool text-center">
+        <span className="font-cond text-3xl text-edge/80">{p.name}</span>
+        <span className="label-cond text-dim">No print yet</span>
       </div>
     </div>
   );
 }
 
-const bar = "rounded bg-muted";
-function EduUI() {
+function ProjectLinks({ p }: { p: Project }) {
+  if (!p.liveUrl && !p.githubUrl)
+    return <p className="label-cond text-dim">Case study coming soon</p>;
   return (
-    <div className="grid h-full grid-cols-[22%_1fr] gap-3">
-      <div className="space-y-2 rounded-md bg-surface p-2">
-        <div className="h-3 w-3/4 rounded bg-primary/60" />
-        {[...Array(5)].map((_, i) => <div key={i} className={`h-2.5 ${bar}`} />)}
-      </div>
-      <div className="flex flex-col gap-3">
-        <div className="grid grid-cols-3 gap-2">
-          {["bg-primary/25", "bg-violet/25", "bg-success/20"].map((c) => (
-            <div key={c} className={`h-12 rounded-md ${c} p-2`}><div className="h-2 w-1/2 rounded bg-foreground/30" /></div>
-          ))}
-        </div>
-        <div className="flex flex-1 items-end gap-1.5 rounded-md bg-surface p-3">
-          {[40, 65, 50, 80, 60, 90, 70, 55].map((h, i) => <div key={i} className="flex-1 rounded-sm bg-primary/60" style={{ height: `${h}%` }} />)}
-        </div>
-      </div>
-    </div>
-  );
-}
-function MarketUI() {
-  return (
-    <div className="flex h-full flex-col gap-3">
-      <div className="flex gap-2"><div className="h-6 flex-1 rounded-md border bg-surface" /><div className="h-6 w-16 rounded-md bg-primary/60" /></div>
-      <div className="flex gap-1.5">{[...Array(5)].map((_, i) => <div key={i} className="h-4 w-12 rounded-full border" />)}</div>
-      <div className="grid flex-1 grid-cols-3 gap-2">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="flex flex-col gap-1 rounded-md bg-surface p-1.5">
-            <div className={`flex-1 rounded ${i % 2 ? "bg-violet/20" : "bg-primary/20"}`} />
-            <div className={`h-1.5 w-3/4 ${bar}`} /><div className="h-1.5 w-1/3 rounded bg-primary/50" />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-function ShopUI() {
-  return (
-    <div className="grid h-full grid-cols-2 gap-4">
-      <div className="rounded-md bg-gradient-to-br from-accent to-surface p-3">
-        <div className="mx-auto mt-6 h-1/2 w-3/4 rounded-t-3xl bg-muted-foreground/25" />
-        <div className="mx-auto h-3 w-5/6 rounded bg-muted-foreground/35" />
-      </div>
-      <div className="flex flex-col justify-center gap-2.5">
-        <div className="h-2 w-1/3 rounded bg-primary/50" />
-        <div className="h-4 w-5/6 rounded bg-foreground/40" />
-        <div className={`h-2 w-full ${bar}`} /><div className={`h-2 w-2/3 ${bar}`} />
-        <div className="flex gap-1.5 pt-1">{["bg-muted-foreground/40", "bg-primary/40", "bg-violet/40"].map((c) => <span key={c} className={`size-4 rounded-full ${c}`} />)}</div>
-        <div className="mt-2 h-7 w-2/3 rounded-md bg-primary/70" />
-      </div>
-    </div>
+    <>
+      {p.liveUrl && (
+        <LinkButton href={p.liveUrl} target="_blank" rel="noopener noreferrer">
+          View project <ArrowUpRight className="size-4" aria-hidden />
+        </LinkButton>
+      )}
+      {p.githubUrl && (
+        <LinkButton href={p.githubUrl} target="_blank" rel="noopener noreferrer" variant="outline">
+          <GithubIcon /> GitHub
+        </LinkButton>
+      )}
+    </>
   );
 }

@@ -1,44 +1,64 @@
-import { Database, Download, Layers, LayoutTemplate, Plug, Server, Smartphone, Wrench, Mail, ArrowUpRight } from "lucide-react";
-import { approach, cv, cvHref, experience, profile, skillGroups } from "@/content/portfolio";
-import { GithubIcon, LinkButton, LinkedinIcon, Reveal, SectionHeader } from "./primitives";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { approach, cv, cvHref, experience, hero, profile, skillGroups } from "@/content/portfolio";
+import { GithubIcon, LinkButton, LinkedinIcon, SectionHead } from "./primitives";
 
-const icons = { layout: LayoutTemplate, layers: Layers, plug: Plug, wrench: Wrench, smartphone: Smartphone, server: Server, database: Database };
-const wrap = "mx-auto max-w-6xl px-5";
+const wrap = "mx-auto max-w-7xl px-4 sm:px-6";
 
 export function About() {
   const facts = [
     { k: "Approach", v: "Clean architecture, reusable components, reliable API integration." },
-    { k: "Interests", v: "Frontend architecture, performance, real-time UIs, AI-assisted workflows." },
+    {
+      k: "Interests",
+      v: "Frontend architecture, performance, real-time UIs, AI-assisted workflows.",
+    },
     { k: "Goal", v: "Grow as a frontend engineer on products in Egypt, the Gulf, or remote." },
+    { k: "Based in", v: `${profile.location} · Open to Saudi Arabia, Gulf & remote` },
   ];
   return (
-    <section id="about" className="py-24">
+    <section id="about" aria-labelledby="about-title" className="py-24 sm:py-32">
       <div className={wrap}>
-        <SectionHeader eyebrow="About" title="Practical frontend, built for real products" />
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
-          <Reveal className="space-y-5 text-muted-foreground">
-            <p>I'm a Frontend Developer focused on building modern web applications with React, Angular, and TypeScript.</p>
-            <p>I enjoy transforming complex requirements into clean, maintainable interfaces with responsive layouts, reusable components, and reliable API integrations.</p>
-            <p>My experience includes educational platforms, dashboards, authentication systems, real-time communication, and payment integrations.</p>
-            <p>I'm continuously improving my frontend architecture, performance, and development workflow using modern tools and AI-assisted development.</p>
-            <LinkButton href={cvHref} variant="outline" className="mt-2" {...(cv.available ? { download: cv.fileName } : {})}>
-              <Download className="size-4" /> {cv.available ? "Download CV" : "Request CV"}
-            </LinkButton>
-          </Reveal>
-          <Reveal delay={100}>
-            <dl className="divide-y rounded-lg border bg-card">
-              {facts.map((f) => (
-                <div key={f.k} className="p-5">
-                  <dt className="font-mono text-xs uppercase tracking-widest text-primary">{f.k}</dt>
-                  <dd className="mt-2 text-sm">{f.v}</dd>
-                </div>
-              ))}
-              <div className="p-5">
-                <dt className="font-mono text-xs uppercase tracking-widest text-primary">Based in</dt>
-                <dd className="mt-2 text-sm">{profile.location} · Open to Saudi Arabia, Gulf &amp; remote</dd>
+        <SectionHead
+          id="about-title"
+          title="Practical frontend, built for real products"
+          slate="About"
+        />
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="space-y-5 text-lg lg:col-span-7">
+            <p className="text-edge">
+              I'm a Frontend Developer focused on building modern web applications with React,
+              Angular, and TypeScript.
+            </p>
+            <p className="text-edge">{hero.stack}</p>
+            <p className="text-dim">
+              I enjoy transforming complex requirements into clean, maintainable interfaces with
+              responsive layouts, reusable components, and reliable API integrations.
+            </p>
+            <p className="text-dim">
+              My experience includes educational platforms, dashboards, authentication systems,
+              real-time communication, and payment integrations.
+            </p>
+            <p className="text-dim">
+              I'm continuously improving my frontend architecture, performance, and development
+              workflow using modern tools and AI-assisted development.
+            </p>
+            <div className="pt-4">
+              <LinkButton
+                href={cvHref}
+                variant="outline"
+                {...(cv.available ? { download: cv.fileName } : {})}
+              >
+                {cv.available ? "Download CV" : "Request CV"}
+              </LinkButton>
+            </div>
+          </div>
+          <dl className="holes-ends self-start rounded-[3px] border border-flag/40 bg-char px-8 text-flag/50 lg:col-span-5">
+            {facts.map((f) => (
+              <div key={f.k} className="border-b border-dashed border-edge/15 py-5 last:border-b-0">
+                <dt className="label-cond text-flag">{f.k}</dt>
+                <dd className="mt-1.5 text-[0.9375rem] text-edge">{f.v}</dd>
               </div>
-            </dl>
-          </Reveal>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
@@ -47,31 +67,36 @@ export function About() {
 
 export function Skills() {
   return (
-    <section id="skills" className="border-y bg-surface/40 py-24">
+    <section id="skills" aria-labelledby="skills-title" className="border-y bg-char py-24 sm:py-32">
       <div className={wrap}>
-        <SectionHeader eyebrow="Skills" title="Technical toolkit" intro="The technologies I use day to day to ship production interfaces." />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {skillGroups.map((g, i) => {
-            const Icon = icons[g.icon];
-            return (
-              <Reveal key={g.title} delay={i * 60} className={g.title === "Frontend" ? "lg:row-span-2" : ""}>
-                <div className="h-full rounded-lg border bg-card p-6 transition-colors hover:border-primary/40">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex size-9 items-center justify-center rounded-md bg-primary/10 text-primary">
-                      <Icon className="size-4" aria-hidden />
-                    </span>
-                    <h3 className="text-base font-semibold">{g.title}</h3>
-                  </div>
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {g.items.map((s) => (
-                      <li key={s} className="rounded-md border bg-secondary px-2.5 py-1 text-sm text-secondary-foreground">{s}</li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
+        <SectionHead
+          id="skills-title"
+          title="Technical toolkit"
+          slate={`Skills · ${skillGroups.length} reels`}
+          intro="The technologies I use day to day to ship production interfaces."
+        />
+        <dl>
+          {skillGroups.map((g) => (
+            <div
+              key={g.title}
+              className="grid gap-3 border-t py-6 sm:grid-cols-[14rem_1fr] sm:gap-8 last:border-b"
+            >
+              <dt className="font-cond text-3xl text-flag">{g.title}</dt>
+              <dd>
+                <ul className="flex flex-wrap gap-x-2 gap-y-1 text-lg text-edge">
+                  {g.items.map((s, i) => (
+                    <li key={s} className="flex items-center gap-2">
+                      {s}
+                      {i < g.items.length - 1 && (
+                        <span aria-hidden className="size-1.5 bg-dim/40" />
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );
@@ -79,52 +104,81 @@ export function Skills() {
 
 export function Experience() {
   return (
-    <section id="experience" className="py-24">
+    <section id="experience" aria-labelledby="experience-title" className="py-24 sm:py-32">
       <div className={wrap}>
-        <SectionHeader eyebrow="Experience" title="Where I work" />
-        <ol className="relative border-l pl-8">
-          {experience.map((e) => (
-            <li key={e.company}>
-              <Reveal>
-                <span aria-hidden className="absolute -left-[5px] mt-2 size-2.5 rounded-full bg-primary" />
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="text-xl font-semibold">{e.role} <span className="text-muted-foreground">· {e.company}</span></h3>
-                  <p className="font-mono text-xs text-muted-foreground">{e.period}</p>
-                </div>
-                <p className="mt-3 max-w-2xl text-muted-foreground">{e.description}</p>
-                <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-                  {e.responsibilities.map((r) => (
-                    <li key={r} className="flex gap-2 text-sm"><span className="text-primary" aria-hidden>→</span>{r}</li>
-                  ))}
-                </ul>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
+        <SectionHead id="experience-title" title="Where I work" slate="Experience" />
+        {experience.map((e) => (
+          <article
+            key={e.company}
+            className="holes-ends rounded-[3px] border border-flag/40 bg-char px-10 py-8 text-flag/50 sm:px-12 sm:py-10"
+          >
+            <div className="grid gap-8 lg:grid-cols-12">
+              <div className="lg:col-span-8">
+                <h3 className="font-cond text-[clamp(2.25rem,4vw,3.25rem)] text-edge">{e.role}</h3>
+                <p className="label-cond mt-2 text-flag">{e.company}</p>
+                <p className="mt-5 max-w-[60ch] text-edge">{e.description}</p>
+              </div>
+              <TimecodeCard period={e.period} />
+            </div>
+            <ul className="mt-8 grid gap-x-8 gap-y-2.5 border-t border-dashed border-edge/15 pt-6 sm:grid-cols-2">
+              {e.responsibilities.map((r) => (
+                <li key={r} className="flex items-baseline gap-2.5 text-[0.9375rem] text-edge">
+                  <span aria-hidden className="size-1.5 shrink-0 translate-y-[-2px] bg-flag" />
+                  {r}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
       </div>
     </section>
   );
 }
 
+/** In / out points read off the period string ("July 2025 – Present"). */
+function TimecodeCard({ period }: { period: string }) {
+  const [start, end] = period.split(/\s*[–-]\s*/);
+  return (
+    <dl className="label-cond tabular self-start text-edge lg:col-span-4">
+      <div className="flex justify-between border-b border-dashed border-edge/15 py-3">
+        <dt className="text-dim">In</dt>
+        <dd>{start}</dd>
+      </div>
+      <div className="flex justify-between border-b border-dashed border-edge/15 py-3">
+        <dt className="text-dim">Out</dt>
+        <dd className={end === "Present" ? "text-flag" : undefined}>{end ?? "—"}</dd>
+      </div>
+    </dl>
+  );
+}
+
 export function Approach() {
   return (
-    <section aria-labelledby="approach-title" className="border-y bg-surface/40 py-24">
+    <section aria-labelledby="approach-title" className="stock pt-24 pb-16 sm:pt-32 sm:pb-20">
       <div className={wrap}>
-        <Reveal className="mb-12 max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">Process</p>
-          <h2 id="approach-title" className="mt-3 text-3xl font-semibold sm:text-4xl">How I approach projects</h2>
-        </Reveal>
-        <ol className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {approach.map((s, i) => (
-            <li key={s.title} className="bg-card p-6">
-              <Reveal delay={i * 50}>
-                <p className="font-mono text-sm text-primary">0{i + 1}</p>
-                <h3 className="mt-3 text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
+        <SectionHead
+          id="approach-title"
+          title="How I approach projects"
+          slate={`Process · ${approach.length} steps`}
+          tone="stock"
+        />
+      </div>
+      <div className="overflow-x-auto [scrollbar-width:thin] [scrollbar-color:var(--ink)_var(--flag)]">
+        <div className="mx-auto w-max min-w-full max-w-7xl lg:w-auto">
+          <div aria-hidden className="perf-x" />
+          <ol className="mx-auto grid max-w-7xl auto-cols-[15rem] grid-flow-col gap-[var(--pitch)] px-4 py-3 sm:px-6 lg:auto-cols-auto lg:grid-flow-row lg:grid-cols-6">
+            {approach.map((s, i) => (
+              <li key={s.title} className="flex min-h-56 flex-col rounded-[3px] bg-ink p-5">
+                <span className="font-cond tabular text-4xl text-flag">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-cond mt-10 text-2xl text-edge">{s.title}</h3>
+                <p className="mt-2 text-[0.9375rem] leading-snug text-dim">{s.text}</p>
+              </li>
+            ))}
+          </ol>
+          <div aria-hidden className="perf-x" />
+        </div>
       </div>
     </section>
   );
@@ -133,33 +187,66 @@ export function Approach() {
 export function Contact() {
   const links = [
     { label: "Email", value: profile.email, href: `mailto:${profile.email}`, Icon: Mail },
-    { label: "LinkedIn", value: profile.linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""), href: profile.linkedin, Icon: LinkedinIcon },
-    { label: "GitHub", value: "github.com/roone858", href: profile.github, Icon: GithubIcon },
+    {
+      label: "LinkedIn",
+      value: profile.linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
+      href: profile.linkedin,
+      Icon: LinkedinIcon,
+    },
+    {
+      label: "GitHub",
+      value: profile.github.replace(/^https?:\/\//, ""),
+      href: profile.github,
+      Icon: GithubIcon,
+    },
   ];
   return (
-    <section id="contact" className="relative overflow-hidden py-28">
-      <div aria-hidden className="absolute inset-0 bg-glow opacity-70" />
-      <div className={`${wrap} relative`}>
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">Contact</p>
-          <h2 className="mt-3 text-4xl font-semibold sm:text-5xl">Let's Build Something Great</h2>
-          <p className="mt-5 text-muted-foreground">I'm open to frontend development opportunities, freelance projects, and collaborations.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <LinkButton href={`mailto:${profile.email}?subject=${encodeURIComponent("Let's work together")}`}>Contact Me</LinkButton>
-            <LinkButton href={`mailto:${profile.email}`} variant="outline"><Mail className="size-4" /> Email Me</LinkButton>
-            <LinkButton href={profile.github} target="_blank" rel="noopener noreferrer" variant="outline"><GithubIcon /> View GitHub</LinkButton>
+    <section id="contact" aria-labelledby="contact-title" className="stock py-24 sm:py-32">
+      <div className={`${wrap} grid gap-14 lg:grid-cols-12`}>
+        <div className="lg:col-span-7">
+          <h2 id="contact-title" className="font-cond text-[clamp(3rem,8vw,5.5rem)] text-ink">
+            Let's build <span className="text-punch">something great.</span>
+          </h2>
+          <p className="mt-6 max-w-[48ch] text-lg text-ink">
+            I'm open to frontend development opportunities, freelance projects, and collaborations.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
+            <LinkButton
+              href={`mailto:${profile.email}?subject=${encodeURIComponent("Let's work together")}`}
+              variant="dark"
+            >
+              Contact me
+            </LinkButton>
+            <LinkButton
+              href={cvHref}
+              variant="outlineInk"
+              {...(cv.available ? { download: cv.fileName } : {})}
+            >
+              {cv.available ? "Download CV" : "Request CV"}
+            </LinkButton>
           </div>
-        </Reveal>
-        <ul className="mx-auto mt-14 grid max-w-4xl gap-3 sm:grid-cols-3">
+        </div>
+        <ul className="self-end lg:col-span-5">
           {links.map(({ label, value, href, Icon }) => (
-            <li key={label}>
-              <a href={href} {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="group flex h-full flex-col rounded-lg border bg-card p-5 transition-colors hover:border-primary/40">
-                <span className="flex items-center justify-between text-sm text-muted-foreground">
-                  <span className="flex items-center gap-2"><Icon className="size-4" /> {label}</span>
-                  <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+            <li key={label} className="border-t border-ink/30 last:border-b">
+              <a
+                href={href}
+                {...(href.startsWith("http")
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="group flex items-center gap-4 py-5 text-ink"
+              >
+                <Icon className="size-5 shrink-0" />
+                <span className="min-w-0 flex-1">
+                  <span className="label-cond block opacity-75">{label}</span>
+                  <span className="mt-1 block break-all font-semibold group-hover:underline">
+                    {value}
+                  </span>
                 </span>
-                <span className="mt-3 break-all text-sm font-medium">{value}</span>
+                <ArrowUpRight
+                  className="size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  aria-hidden
+                />
               </a>
             </li>
           ))}
@@ -171,13 +258,31 @@ export function Contact() {
 
 export function Footer() {
   return (
-    <footer className="border-t py-8">
-      <div className={`${wrap} flex flex-col items-center justify-between gap-3 text-sm text-muted-foreground sm:flex-row`}>
-        <p>© {new Date().getFullYear()} {profile.name} · {profile.role}</p>
-        <div className="flex gap-4">
-          <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-foreground"><GithubIcon /></a>
-          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-foreground"><LinkedinIcon /></a>
-          <a href={`mailto:${profile.email}`} aria-label="Email" className="hover:text-foreground"><Mail className="size-4" /></a>
+    <footer>
+      <div aria-hidden className="stock">
+        <div className="perf-x" />
+      </div>
+      <div className={`${wrap} flex flex-col items-center justify-between gap-4 py-8 sm:flex-row`}>
+        <p className="label-cond text-dim">
+          © {new Date().getFullYear()} {profile.name} · {profile.role} ·{" "}
+          <span className="text-flag">End of reel</span>
+        </p>
+        <div className="flex gap-2">
+          {[
+            { href: profile.github, label: "GitHub", Icon: GithubIcon },
+            { href: profile.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
+            { href: `mailto:${profile.email}`, label: "Email", Icon: Mail },
+          ].map(({ href, label, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              aria-label={label}
+              {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="inline-flex size-11 items-center justify-center text-dim transition-colors hover:text-flag"
+            >
+              <Icon className="size-5" />
+            </a>
+          ))}
         </div>
       </div>
     </footer>

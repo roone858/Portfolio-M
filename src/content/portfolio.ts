@@ -2,13 +2,24 @@
 
 export const profile = {
   name: "Mahmoud Gamal",
+  nameAr: "محمود جمال",
   role: "Frontend Developer",
   location: "Egypt",
   email: "mahmoudG.dev@gmail.com",
   linkedin: "https://www.linkedin.com/in/mahmoud-gamal-abdelsalam/",
   github: "https://github.com/roone858",
+  photo: { src: "/images/mahmoud-gamal.webp", width: 800, height: 1067 },
   positioning:
     "I build modern, responsive, and scalable web applications with a focus on clean architecture, performance, and exceptional user experience.",
+};
+
+export const hero = {
+  status: "Open to frontend roles & freelance projects",
+  titleTop: "Frontend Developer",
+  titleBottom: "Building modern web experiences.",
+  lede: "I build responsive, scalable, and user-focused web applications using React, Angular, TypeScript, and modern frontend technologies.",
+  stack:
+    "Full-stack capable: NestJS, Node.js, MongoDB and PostgreSQL behind the interface. Shipping in English and Arabic (RTL).",
 };
 
 // CV served from public/cv/. Set `available: false` to make the CV buttons open an email request instead.
@@ -24,12 +35,41 @@ export const cvHref = cv.available
   : `mailto:${profile.email}?subject=${encodeURIComponent("CV request — Frontend Developer")}`;
 
 export const skillGroups = [
-  { title: "Frontend", icon: "layout", items: ["React", "Angular", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS"] },
-  { title: "Backend", icon: "server", items: ["Node.js", "Express.js", "NestJS", "OAuth", "Stripe"] },
-  { title: "Databases", icon: "database", items: ["MongoDB", "Mongoose", "PostgreSQL", "Prisma", "SQL"] },
+  {
+    title: "Frontend",
+    icon: "layout",
+    items: [
+      "React",
+      "Angular",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    title: "Backend",
+    icon: "server",
+    items: ["Node.js", "Express.js", "NestJS", "OAuth", "Stripe"],
+  },
+  {
+    title: "Databases",
+    icon: "database",
+    items: ["MongoDB", "Mongoose", "PostgreSQL", "Prisma", "SQL"],
+  },
   { title: "State Management", icon: "layers", items: ["Redux Toolkit"] },
-  { title: "API & Integration", icon: "plug", items: ["REST APIs", "Axios", "JWT Authentication", "WebSockets"] },
-  { title: "Tools", icon: "wrench", items: ["Git", "GitHub", "Vite", "npm", "VS Code", "Claude Code", "GitHub Copilot"] },
+  {
+    title: "API & Integration",
+    icon: "plug",
+    items: ["REST APIs", "Axios", "JWT Authentication", "WebSockets"],
+  },
+  {
+    title: "Tools",
+    icon: "wrench",
+    items: ["Git", "GitHub", "Vite", "npm", "VS Code", "Claude Code", "GitHub Copilot"],
+  },
   { title: "Mobile", icon: "smartphone", items: ["React Native", "Expo"] },
 ] as const;
 
@@ -53,7 +93,13 @@ export const projects: Project[] = [
     description:
       "A modern educational platform providing students and teachers with interactive learning experiences, dashboards, and educational management features.",
     tech: ["React", "TypeScript", "Redux Toolkit", "Tailwind CSS", "REST APIs"],
-    highlights: ["Educational dashboards", "Responsive interfaces", "API integration", "Authentication", "Reusable components"],
+    highlights: [
+      "Educational dashboards",
+      "Responsive interfaces",
+      "API integration",
+      "Authentication",
+      "Reusable components",
+    ],
     preview: "edu",
     image: "/projects/dolphin.webp",
     liveUrl: "https://app.learnatdolphin.com/",
@@ -64,7 +110,13 @@ export const projects: Project[] = [
     description:
       "A modern classified marketplace designed to connect buyers and sellers through organized listings, product categories, and direct communication.",
     tech: [],
-    highlights: ["Marketplace experience", "Listing management", "Responsive design", "SEO-friendly architecture", "Modern user experience"],
+    highlights: [
+      "Marketplace experience",
+      "Listing management",
+      "Responsive design",
+      "SEO-friendly architecture",
+      "Modern user experience",
+    ],
     preview: "market",
   },
   {
@@ -73,7 +125,12 @@ export const projects: Project[] = [
     description:
       "A modern furniture e-commerce experience focused on elegant product presentation, responsive shopping interfaces, and a premium visual identity.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS"],
-    highlights: ["Product presentation", "E-commerce UI", "Responsive layouts", "Brand-focused design"],
+    highlights: [
+      "Product presentation",
+      "E-commerce UI",
+      "Responsive layouts",
+      "Brand-focused design",
+    ],
     preview: "shop",
     image: "/projects/taraf.webp",
     liveUrl: "https://tarafhome.com/",
@@ -84,7 +141,13 @@ export const projects: Project[] = [
     description:
       "An Arabic (RTL) e-commerce store for mattresses and bedding, with product categories, size selection, order tracking, and WhatsApp ordering.",
     tech: ["React", "TypeScript", "NestJS", "MongoDB"],
-    highlights: ["RTL Arabic interface", "Product catalog & sizes", "Order tracking", "WhatsApp ordering", "Customer reviews & FAQ"],
+    highlights: [
+      "RTL Arabic interface",
+      "Product catalog & sizes",
+      "Order tracking",
+      "WhatsApp ordering",
+      "Customer reviews & FAQ",
+    ],
     preview: "shop",
     image: "/projects/sukoon.webp",
     liveUrl: "https://www.sukoony.com/",
@@ -95,7 +158,13 @@ export const projects: Project[] = [
     description:
       "An Arabic (RTL) website for an Islamic center, presenting its Quran courses, services, scholars, and articles, with donation campaigns that show live funding progress.",
     tech: [],
-    highlights: ["RTL Arabic interface", "Donation campaigns", "Services & courses", "Scholars & articles", "Responsive design"],
+    highlights: [
+      "RTL Arabic interface",
+      "Donation campaigns",
+      "Services & courses",
+      "Scholars & articles",
+      "Responsive design",
+    ],
     preview: "edu",
     image: "/projects/tawba.webp",
     liveUrl: "https://tawba.vercel.app/",
@@ -122,7 +191,10 @@ export const experience = [
 ];
 
 export const approach = [
-  { title: "Understand", text: "Clarify requirements, users, and constraints before writing code." },
+  {
+    title: "Understand",
+    text: "Clarify requirements, users, and constraints before writing code.",
+  },
   { title: "Plan", text: "Map the interface and architecture: routes, state, and data flow." },
   { title: "Build", text: "Compose reusable, typed components with consistent styling." },
   { title: "Integrate", text: "Connect REST APIs, auth, and real-time features reliably." },

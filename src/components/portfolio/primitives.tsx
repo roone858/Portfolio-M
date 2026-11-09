@@ -1,39 +1,25 @@
-import { useEffect, useRef, type ReactNode, type AnchorHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes, ReactNode } from "react";
+import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function Reveal({ children, className, delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e?.isIntersecting) {
-          el.classList.add("is-visible");
-          io.disconnect();
-        }
-      },
-      { threshold: 0.12 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-  return (
-    <div ref={ref} className={cn("reveal", className)} style={{ transitionDelay: `${delay}ms` }}>
-      {children}
-    </div>
-  );
-}
-
-type Variant = "primary" | "outline" | "ghost";
+type Variant = "plate" | "outline" | "outlineInk" | "link" | "dark";
 const variants: Record<Variant, string> = {
-  primary: "bg-primary text-primary-foreground hover:bg-primary/90",
-  outline: "border border-input bg-surface/60 text-foreground hover:bg-accent",
-  ghost: "text-muted-foreground hover:text-foreground",
+  // Primary: orange plate with sprocket holes punched at both ends.
+  plate: "holes-ends stock text-ink hover:bg-flag-deep active:translate-y-px px-9",
+  // Secondary: hairline plate on the bench, holes in orange.
+  outline:
+    "holes-ends border border-flag text-flag hover:bg-flag hover:text-ink active:translate-y-px px-9",
+  // Ink hairline plate, used on orange stock.
+  outlineInk:
+    "holes-ends border border-ink text-ink hover:bg-ink hover:text-flag active:translate-y-px px-9",
+  // Black plate, used on orange stock.
+  dark: "holes-ends bg-ink text-flag hover:bg-char active:translate-y-px px-9",
+  // Text action with a play marker.
+  link: "px-1 text-flag hover:text-edge",
 };
 
 export function LinkButton({
-  variant = "primary",
+  variant = "plate",
   className,
   children,
   ...props
@@ -41,24 +27,64 @@ export function LinkButton({
   return (
     <a
       className={cn(
-        "inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 text-sm font-semibold transition-colors",
+        "label-cond inline-flex min-h-12 items-center justify-center gap-2 rounded-[3px] text-[0.9375rem] transition-colors duration-150",
         variants[variant],
         className,
       )}
       {...props}
     >
       {children}
+      {variant === "link" && <ChevronRight className="size-4" aria-hidden />}
     </a>
   );
 }
 
-export function SectionHeader({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) {
+/** Section head: a condensed heading on the left, the frame's slate on the right, a timecode ruler beneath. */
+export function SectionHead({
+  id,
+  title,
+  slate,
+  intro,
+  tone = "bench",
+}: {
+  id?: string;
+  title: ReactNode;
+  slate: string;
+  intro?: string;
+  tone?: "bench" | "stock";
+}) {
   return (
-    <Reveal className="mb-12 max-w-2xl">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{eyebrow}</p>
-      <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">{title}</h2>
-      {intro && <p className="mt-4 text-muted-foreground">{intro}</p>}
-    </Reveal>
+    <header className="mb-12 sm:mb-16">
+      <div className="flex items-end justify-between gap-6">
+        <h2 id={id} className="font-cond text-[clamp(2.75rem,7vw,5.5rem)]">
+          {title}
+        </h2>
+        <p
+          className={cn(
+            "label-cond tabular shrink-0 pb-2",
+            tone === "stock" ? "text-ink" : "text-dim",
+          )}
+        >
+          {slate}
+        </p>
+      </div>
+      <div
+        aria-hidden
+        className={cn("ruler mt-5", tone === "stock" ? "text-ink/60" : "text-edge/25")}
+      />
+      {intro && (
+        <p className={cn("mt-6 max-w-[60ch]", tone === "stock" ? "text-ink" : "text-dim")}>
+          {intro}
+        </p>
+      )}
+    </header>
+  );
+}
+
+/** A punched-white window: the only place running images sit. */
+export function Window({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <div className={cn("overflow-hidden rounded-[3px] bg-punch p-1.5", className)}>{children}</div>
   );
 }
 
