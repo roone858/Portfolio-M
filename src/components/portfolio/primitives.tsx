@@ -43,7 +43,7 @@ export function SectionTitle({
   center?: boolean;
 }) {
   return (
-    <header className={cn("mb-12", center && "mx-auto max-w-2xl text-center")}>
+    <header data-reveal className={cn("mb-12", center && "mx-auto max-w-2xl text-center")}>
       <p className="kicker">{kicker}</p>
       <h2 id={id} className="mt-3 text-[clamp(2rem,4vw,2.75rem)]">
         {title}
@@ -58,7 +58,7 @@ export function SectionTitle({
 /** Small heading with a thin rule trailing it (Education, Experience). */
 export function RuleHeading({ id, children }: { id?: string; children: ReactNode }) {
   return (
-    <div className="mb-8 flex items-center gap-5">
+    <div data-reveal className="mb-8 flex items-center gap-5">
       <h3 id={id} className="text-[1.75rem]">
         {children}
       </h3>

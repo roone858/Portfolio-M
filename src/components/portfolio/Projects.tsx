@@ -12,11 +12,15 @@ export function Projects() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <p
           aria-hidden
+          data-reveal
           className="outline-text text-center font-display text-[clamp(3rem,11vw,9rem)] leading-none font-bold uppercase"
         >
           Latest Portfolio
         </p>
-        <header className="mx-auto -mt-[clamp(1.5rem,4vw,3.5rem)] max-w-2xl text-center">
+        <header
+          data-reveal
+          className="mx-auto -mt-[clamp(1.5rem,4vw,3.5rem)] max-w-2xl text-center"
+        >
           <h2 id="projects-title" className="text-[clamp(2rem,4vw,2.75rem)]">
             Selected projects
           </h2>
@@ -26,7 +30,7 @@ export function Projects() {
         </header>
         <ul className="mt-16 grid gap-x-10 gap-y-14 md:grid-cols-2">
           {projects.map((p, i) => (
-            <li key={p.name} className={cn(i % 2 === 1 && "md:mt-14")}>
+            <li key={p.name} data-reveal className={cn(i % 2 === 1 && "md:mt-14")}>
               <ProjectCard p={p} />
             </li>
           ))}

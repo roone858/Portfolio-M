@@ -20,8 +20,12 @@ export function Hero() {
 
         <div className="mt-10 grid items-end gap-10 lg:mt-6 lg:grid-cols-[1fr_minmax(0,26rem)_1fr] lg:gap-8">
           <dl className="order-2 grid grid-cols-3 gap-4 self-center lg:order-1 lg:grid-cols-1 lg:gap-12">
-            {heroStats.map((s) => (
-              <div key={s.label}>
+            {heroStats.map((s, i) => (
+              <div
+                key={s.label}
+                className="animate-rise"
+                style={{ animationDelay: `${450 + i * 120}ms` }}
+              >
                 <dt className="sr-only">{s.label}</dt>
                 <dd className="font-display text-[clamp(2.25rem,4vw,3.25rem)] leading-none font-bold text-heading">
                   {s.value}
@@ -32,18 +36,26 @@ export function Hero() {
           </dl>
 
           <div className="relative order-1 mx-auto w-full max-w-[22rem] sm:max-w-[26rem] lg:order-2">
-            <div aria-hidden className="arch absolute inset-x-0 top-[14%] bottom-0" />
+            <div
+              aria-hidden
+              className="arch animate-arch absolute inset-x-0 top-[14%] bottom-0"
+              style={{ animationDelay: "150ms" }}
+            />
             <img
               src={profile.cutout.src}
               width={profile.cutout.width}
               height={profile.cutout.height}
               alt={`Portrait of ${profile.name}`}
               fetchPriority="high"
-              className="fade-bottom relative w-full"
+              className="fade-bottom animate-settle relative w-full"
+              style={{ animationDelay: "300ms" }}
             />
           </div>
 
-          <div className="order-3 space-y-10 self-center pb-6 lg:text-right">
+          <div
+            className="order-3 animate-rise space-y-10 self-center pb-6 lg:text-right"
+            style={{ animationDelay: "600ms" }}
+          >
             <div>
               <p className="font-display text-[1.375rem] font-bold text-heading">Biography :</p>
               <p className="mt-3 lg:ml-auto lg:max-w-[30ch]">{hero.lede}</p>
@@ -88,7 +100,13 @@ function ContourLines() {
       viewBox="0 0 1440 800"
       preserveAspectRatio="xMidYMid slice"
     >
-      <g fill="none" stroke="#ffffff" strokeOpacity="0.05" strokeWidth="1">
+      <g
+        className="animate-drift"
+        fill="none"
+        stroke="#ffffff"
+        strokeOpacity="0.05"
+        strokeWidth="1"
+      >
         {lines.map((d) => (
           <path key={d} d={d} />
         ))}

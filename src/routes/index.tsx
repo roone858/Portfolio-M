@@ -11,6 +11,7 @@ import {
   StackGrid,
 } from "@/components/portfolio/Sections";
 import { profile } from "@/content/portfolio";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const title = "Mahmoud Gamal | Frontend Developer | React & Angular";
 const description =
@@ -55,6 +56,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  useScrollReveal();
   return (
     <>
       <a
