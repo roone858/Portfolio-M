@@ -4,177 +4,125 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Cutting-bench world: ink-black bench, one flag-orange ink in film grain, punched-white windows. */
+/* Dark personal-portfolio theme: near-black ground, charcoal cards, one coral-red accent. */
 
 @theme inline {
-  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-arabic: "Noto Kufi Arabic", "Archivo", sans-serif;
-  --font-mono: "Archivo", ui-sans-serif, sans-serif;
-  --radius-sm: 2px;
-  --radius-md: 3px;
-  --radius-lg: 4px;
-  --radius-xl: 6px;
+  --font-sans: "Rubik", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Rajdhani", ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: "Noto Kufi Arabic", "Rubik", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
 
   --color-ink: var(--ink);
-  --color-char: var(--char);
-  --color-spool: var(--spool);
-  --color-flag: var(--flag);
-  --color-flag-deep: var(--flag-deep);
-  --color-punch: var(--punch);
-  --color-edge: var(--edge);
-  --color-dim: var(--dim);
+  --color-base: var(--base);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-accent-red: var(--red);
+  --color-red-deep: var(--red-deep);
+  --color-heading: var(--heading);
+  --color-body: var(--body);
+  --color-soft: var(--soft);
 
-  --color-background: var(--ink);
-  --color-foreground: var(--edge);
-  --color-card: var(--char);
-  --color-card-foreground: var(--edge);
-  --color-popover: var(--char);
-  --color-popover-foreground: var(--edge);
-  --color-primary: var(--flag);
-  --color-primary-foreground: var(--ink);
-  --color-secondary: var(--spool);
-  --color-secondary-foreground: var(--edge);
-  --color-muted: var(--spool);
-  --color-muted-foreground: var(--dim);
-  --color-accent: var(--spool);
-  --color-accent-foreground: var(--edge);
-  --color-destructive: oklch(0.62 0.21 27);
-  --color-destructive-foreground: var(--punch);
-  --color-border: var(--rule);
-  --color-input: var(--rule-strong);
-  --color-ring: var(--flag);
+  --color-background: var(--base);
+  --color-foreground: var(--heading);
+  --color-card: var(--panel);
+  --color-card-foreground: var(--heading);
+  --color-popover: var(--panel);
+  --color-popover-foreground: var(--heading);
+  --color-primary: var(--red);
+  --color-primary-foreground: #ffffff;
+  --color-secondary: var(--panel-2);
+  --color-secondary-foreground: var(--heading);
+  --color-muted: var(--panel-2);
+  --color-muted-foreground: var(--body);
+  --color-accent: var(--panel-2);
+  --color-accent-foreground: var(--heading);
+  --color-destructive: #e5484d;
+  --color-destructive-foreground: #ffffff;
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--red);
 }
 
 :root {
-  --ink: #0a0a0a;
-  --char: #1a1a1a;
-  --spool: #2e2e2e;
-  --flag: #ff5a1f;
-  --flag-deep: #d9461a;
-  --punch: #ffffff;
-  --edge: #f2f2f2;
-  --dim: #a8a8a8;
-  --rule: oklch(1 0 0 / 12%);
-  --rule-strong: oklch(1 0 0 / 22%);
-
-  /* Frame pitch: the one ruling unit every strip snaps to. */
-  --pitch: 26px;
-
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --holes-x: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='18'%3E%3Crect x='7' y='4' width='12' height='10' rx='2' fill='%230a0a0a'/%3E%3C/svg%3E");
-  --holes-y: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='26'%3E%3Crect x='4' y='7' width='10' height='12' rx='2' fill='%230a0a0a'/%3E%3C/svg%3E");
+  --ink: #060606;
+  --base: #0b0b0b;
+  --panel: #141414;
+  --panel-2: #1c1c1c;
+  --line: #262626;
+  --red: #ff4a4a;
+  --red-deep: #c73636;
+  --heading: #ffffff;
+  --body: #a9a9a9;
+  --soft: #6f6f6f;
 }
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; color-scheme: dark; scrollbar-color: var(--spool) var(--ink); }
+  html { scroll-behavior: smooth; color-scheme: dark; scrollbar-color: var(--panel-2) var(--ink); }
   body {
     background-color: var(--ink);
-    color: var(--edge);
+    color: var(--body);
     font-family: var(--font-sans);
-    font-size: 1.0625rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    caret-color: var(--flag);
+    caret-color: var(--red);
   }
-  ::selection { background: var(--flag); color: var(--ink); }
-  h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
+  ::selection { background: var(--red); color: #fff; }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--heading);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
   p { text-wrap: pretty; }
   a { text-underline-offset: 0.2em; }
-  :focus-visible { outline: 2px solid var(--flag); outline-offset: 3px; }
-  section[id], article[id] { scroll-margin-top: 5rem; }
-  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+  section[id], article[id] { scroll-margin-top: 5.5rem; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: var(--ink); }
-  ::-webkit-scrollbar-thumb { background: var(--spool); border: 3px solid var(--ink); }
-  ::-webkit-scrollbar-thumb:hover { background: var(--flag); }
+  ::-webkit-scrollbar-thumb { background: var(--panel-2); border-radius: 10px; border: 2px solid var(--ink); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--red); }
 }
 
-/* Condensed grotesk voice: display headings and labels. */
-@utility font-cond {
+/* Small red label above a section heading. */
+@utility kicker {
   font-family: var(--font-display);
-  font-stretch: 62%;
-  font-weight: 800;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.005em;
-  line-height: 0.92;
-}
-@utility label-cond {
-  font-family: var(--font-display);
-  font-stretch: 75%;
-  font-weight: 650;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.8125rem;
-  line-height: 1.2;
-}
-@utility tabular { font-variant-numeric: tabular-nums; }
-
-/* Orange film stock with grain. */
-@utility stock {
-  background-color: var(--flag);
-  background-image: var(--grain);
-  color: var(--ink);
-}
-/* Sprocket rows/columns punched through the stock. */
-@utility perf-x {
-  height: 18px;
-  background-image: var(--holes-x);
-  background-repeat: repeat-x;
-  background-size: var(--pitch) 18px;
-}
-@utility perf-y {
-  width: 18px;
-  background-image: var(--holes-y);
-  background-repeat: repeat-y;
-  background-size: 18px var(--pitch);
-}
-/* Three punched sprocket holes at each end of a plate (buttons, clip cards). */
-@utility holes-ends {
-  position: relative;
-  &::before, &::after {
-    content: "";
-    position: absolute;
-    top: 7px;
-    bottom: 7px;
-    width: 6px;
-    background:
-      linear-gradient(currentColor 0 0) top / 6px 7px no-repeat,
-      linear-gradient(currentColor 0 0) center / 6px 7px no-repeat,
-      linear-gradient(currentColor 0 0) bottom / 6px 7px no-repeat;
-    pointer-events: none;
-  }
-  &::before { left: 8px; }
-  &::after { right: 8px; }
-}
-/* Timecode ruler: hairline ticks every frame pitch, taller every fifth. */
-@utility ruler {
-  height: 14px;
-  background-image:
-    linear-gradient(90deg, currentColor 1px, transparent 1px),
-    linear-gradient(90deg, currentColor 1px, transparent 1px);
-  background-size: calc(var(--pitch) * 5) 14px, var(--pitch) 7px;
-  background-repeat: repeat-x;
-  background-position: 0 0, 0 100%;
-}
-/* Folded tape flag marking "where you stopped". */
-@utility tape-flag {
-  background-color: var(--flag);
-  /* The top band is the tape wrapped over the strip edge: a darker crease plane, then the face. */
-  background-image:
-    linear-gradient(180deg, oklch(0 0 0 / 38%) 0 26%, oklch(1 0 0 / 22%) 26% 29%, transparent 29%),
-    linear-gradient(200deg, oklch(1 0 0 / 14%), transparent 45%),
-    var(--grain);
-  clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
-  box-shadow: 0 6px 10px -4px oklch(0 0 0 / 60%);
+  color: var(--red);
 }
 
-/* The one authored moment: the rail slides in and settles on the perforation pitch. */
-@keyframes rail-settle {
-  from { transform: translate3d(calc(var(--pitch) * 6), 0, 0); }
-  to { transform: translate3d(0, 0, 0); }
+/* Hollow display word (outlined text). */
+@utility outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1px oklch(1 0 0 / 14%);
 }
-@utility animate-rail { animation: rail-settle 1.1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* The hero arch behind the portrait. */
+@utility arch {
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(180deg, var(--red) 0%, var(--red-deep) 55%, oklch(0.2 0.03 25) 100%);
+}
+
+/* Fade an element into the page at its bottom edge. */
+@utility fade-bottom {
+  mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to { opacity: 1; transform: none; }
+}
+@utility animate-rise { animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -1,61 +1,79 @@
-import { ArrowUpRight, Mail } from "lucide-react";
-import { approach, cv, cvHref, experience, hero, profile, skillGroups } from "@/content/portfolio";
-import { GithubIcon, LinkButton, LinkedinIcon, SectionHead } from "./primitives";
+import { ArrowUpRight, Code2, Languages, Mail, MapPin, Server, Zap } from "lucide-react";
+import {
+  approach,
+  cv,
+  cvHref,
+  education,
+  experience,
+  hero,
+  highlightStats,
+  navLinks,
+  profile,
+  services,
+  skillGroups,
+  stackWordmarks,
+} from "@/content/portfolio";
+import {
+  GithubIcon,
+  LinkButton,
+  LinkedinIcon,
+  LogoMark,
+  RuleHeading,
+  SectionTitle,
+} from "./primitives";
 
 const wrap = "mx-auto max-w-7xl px-4 sm:px-6";
+const serviceIcons = { code: Code2, server: Server, languages: Languages, zap: Zap };
 
+/** Services cards, then the experience highlight band. */
 export function About() {
-  const facts = [
-    { k: "Approach", v: "Clean architecture, reusable components, reliable API integration." },
-    {
-      k: "Interests",
-      v: "Frontend architecture, performance, real-time UIs, AI-assisted workflows.",
-    },
-    { k: "Goal", v: "Grow as a frontend engineer on products in Egypt, the Gulf, or remote." },
-    { k: "Based in", v: `${profile.location} · Open to Saudi Arabia, Gulf & remote` },
-  ];
+  const { lead, cards } = highlightStats;
   return (
-    <section id="about" aria-labelledby="about-title" className="py-24 sm:py-32">
+    <section id="about" aria-labelledby="about-title" className="py-24">
       <div className={wrap}>
-        <SectionHead
-          id="about-title"
-          title="Practical frontend, built for real products"
-          slate="About"
-        />
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="space-y-5 text-lg lg:col-span-7">
-            <p className="text-edge">
-              I'm a Frontend Developer focused on building modern web applications with React,
-              Angular, and TypeScript.
-            </p>
-            <p className="text-edge">{hero.stack}</p>
-            <p className="text-dim">
-              I enjoy transforming complex requirements into clean, maintainable interfaces with
-              responsive layouts, reusable components, and reliable API integrations.
-            </p>
-            <p className="text-dim">
-              My experience includes educational platforms, dashboards, authentication systems,
-              real-time communication, and payment integrations.
-            </p>
-            <p className="text-dim">
-              I'm continuously improving my frontend architecture, performance, and development
-              workflow using modern tools and AI-assisted development.
-            </p>
-            <div className="pt-4">
-              <LinkButton
-                href={cvHref}
-                variant="outline"
-                {...(cv.available ? { download: cv.fileName } : {})}
+        <h2 id="about-title" className="sr-only">
+          About and services
+        </h2>
+        <ul className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+          {services.map((s) => {
+            const Icon = serviceIcons[s.icon];
+            return (
+              <li
+                key={s.title}
+                className="group rounded-[14px] border border-accent-red/15 bg-base px-3 py-7 text-center sm:px-6 sm:py-9 transition-colors hover:border-accent-red/60"
               >
-                {cv.available ? "Download CV" : "Request CV"}
-              </LinkButton>
+                <Icon className="mx-auto size-10 text-accent-red" strokeWidth={1.5} aria-hidden />
+                <h3 className="mt-5 text-[1.125rem] sm:text-[1.375rem]">{s.title}</h3>
+                <p className="mt-1.5 text-sm sm:text-[0.9375rem]">{s.text}</p>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="mt-16 grid gap-5 lg:grid-cols-2">
+          <div className="flex flex-col justify-center rounded-[18px] bg-panel p-8 sm:p-10">
+            <div className="flex items-center gap-6">
+              <span className="font-display text-[clamp(5rem,10vw,8rem)] leading-[0.85] font-bold text-accent-red">
+                {lead.value}
+              </span>
+              <span className="max-w-[9ch] font-display text-[clamp(1.75rem,3vw,2.5rem)] leading-tight font-bold text-heading">
+                {lead.label}
+              </span>
             </div>
+            <p className="mt-6 text-heading/85">{lead.text}</p>
+            <p className="mt-3">{hero.stack}</p>
           </div>
-          <dl className="holes-ends self-start rounded-[3px] border border-flag/40 bg-char px-8 text-flag/50 lg:col-span-5">
-            {facts.map((f) => (
-              <div key={f.k} className="border-b border-dashed border-edge/15 py-5 last:border-b-0">
-                <dt className="label-cond text-flag">{f.k}</dt>
-                <dd className="mt-1.5 text-[0.9375rem] text-edge">{f.v}</dd>
+          <dl className="grid grid-cols-2 gap-5">
+            {cards.map((c) => (
+              <div
+                key={c.label}
+                className="flex flex-col items-center justify-center rounded-[18px] bg-panel px-4 py-8 text-center"
+              >
+                <dt className="sr-only">{c.label}</dt>
+                <dd className="font-display text-[clamp(2rem,3.4vw,2.75rem)] leading-none font-bold text-heading">
+                  {c.value}
+                </dd>
+                <dd className="mt-3 text-[0.9375rem]">{c.label}</dd>
               </div>
             ))}
           </dl>
@@ -65,189 +83,188 @@ export function About() {
   );
 }
 
-export function Skills() {
-  return (
-    <section id="skills" aria-labelledby="skills-title" className="border-y bg-char py-24 sm:py-32">
-      <div className={wrap}>
-        <SectionHead
-          id="skills-title"
-          title="Technical toolkit"
-          slate={`Skills · ${skillGroups.length} reels`}
-          intro="The technologies I use day to day to ship production interfaces."
-        />
-        <dl>
-          {skillGroups.map((g) => (
-            <div
-              key={g.title}
-              className="grid gap-3 border-t py-6 sm:grid-cols-[14rem_1fr] sm:gap-8 last:border-b"
-            >
-              <dt className="font-cond text-3xl text-flag">{g.title}</dt>
-              <dd>
-                <ul className="flex flex-wrap gap-x-2 gap-y-1 text-lg text-edge">
-                  {g.items.map((s, i) => (
-                    <li key={s} className="flex items-center gap-2">
-                      {s}
-                      {i < g.items.length - 1 && (
-                        <span aria-hidden className="size-1.5 bg-dim/40" />
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </section>
-  );
-}
-
-export function Experience() {
-  return (
-    <section id="experience" aria-labelledby="experience-title" className="py-24 sm:py-32">
-      <div className={wrap}>
-        <SectionHead id="experience-title" title="Where I work" slate="Experience" />
-        {experience.map((e) => (
-          <article
-            key={e.company}
-            className="holes-ends rounded-[3px] border border-flag/40 bg-char px-10 py-8 text-flag/50 sm:px-12 sm:py-10"
-          >
-            <div className="grid gap-8 lg:grid-cols-12">
-              <div className="lg:col-span-8">
-                <h3 className="font-cond text-[clamp(2.25rem,4vw,3.25rem)] text-edge">{e.role}</h3>
-                <p className="label-cond mt-2 text-flag">{e.company}</p>
-                <p className="mt-5 max-w-[60ch] text-edge">{e.description}</p>
-              </div>
-              <TimecodeCard period={e.period} />
-            </div>
-            <ul className="mt-8 grid gap-x-8 gap-y-2.5 border-t border-dashed border-edge/15 pt-6 sm:grid-cols-2">
-              {e.responsibilities.map((r) => (
-                <li key={r} className="flex items-baseline gap-2.5 text-[0.9375rem] text-edge">
-                  <span aria-hidden className="size-1.5 shrink-0 translate-y-[-2px] bg-flag" />
-                  {r}
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/** In / out points read off the period string ("July 2025 – Present"). */
-function TimecodeCard({ period }: { period: string }) {
-  const [start, end] = period.split(/\s*[–-]\s*/);
-  return (
-    <dl className="label-cond tabular self-start text-edge lg:col-span-4">
-      <div className="flex justify-between border-b border-dashed border-edge/15 py-3">
-        <dt className="text-dim">In</dt>
-        <dd>{start}</dd>
-      </div>
-      <div className="flex justify-between border-b border-dashed border-edge/15 py-3">
-        <dt className="text-dim">Out</dt>
-        <dd className={end === "Present" ? "text-flag" : undefined}>{end ?? "—"}</dd>
-      </div>
-    </dl>
-  );
-}
-
+/** Numbered process cards beside a circular portrait. */
 export function Approach() {
   return (
-    <section aria-labelledby="approach-title" className="stock pt-24 pb-16 sm:pt-32 sm:pb-20">
+    <section aria-labelledby="approach-title" className="pb-24">
       <div className={wrap}>
-        <SectionHead
+        <SectionTitle
           id="approach-title"
-          title="How I approach projects"
-          slate={`Process · ${approach.length} steps`}
-          tone="stock"
+          kicker="How I work"
+          title="From requirements to a polished product"
+          intro="A practical process I follow on every project, from the first conversation to the final performance pass."
+          center
         />
-      </div>
-      <div className="overflow-x-auto [scrollbar-width:thin] [scrollbar-color:var(--ink)_var(--flag)]">
-        <div className="mx-auto w-max min-w-full max-w-7xl lg:w-auto">
-          <div aria-hidden className="perf-x" />
-          <ol className="mx-auto grid max-w-7xl auto-cols-[15rem] grid-flow-col gap-[var(--pitch)] px-4 py-3 sm:px-6 lg:auto-cols-auto lg:grid-flow-row lg:grid-cols-6">
+        <div className="grid items-center gap-12 lg:grid-cols-12">
+          <ol className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
             {approach.map((s, i) => (
-              <li key={s.title} className="flex min-h-56 flex-col rounded-[3px] bg-ink p-5">
-                <span className="font-cond tabular text-4xl text-flag">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-cond mt-10 text-2xl text-edge">{s.title}</h3>
-                <p className="mt-2 text-[0.9375rem] leading-snug text-dim">{s.text}</p>
+              <li key={s.title} className="rounded-[14px] bg-panel p-6">
+                <h3 className="text-[1.25rem]">
+                  <span className="mr-2">{String(i + 1).padStart(2, "0")}.</span>
+                  {s.title}
+                </h3>
+                <p className="mt-2 text-[0.9375rem]">{s.text}</p>
               </li>
             ))}
           </ol>
-          <div aria-hidden className="perf-x" />
+          <div className="relative mx-auto aspect-square w-full max-w-[26rem] lg:col-span-5">
+            <div aria-hidden className="absolute inset-[8%] rounded-full bg-panel" />
+            <div
+              aria-hidden
+              className="absolute right-[2%] bottom-[22%] h-[18%] w-[34%] rounded-b-full bg-accent-red"
+            />
+            <span
+              aria-hidden
+              className="absolute bottom-[8%] left-[2%] size-[26%] rounded-full border-2 border-accent-red"
+            />
+            <span
+              aria-hidden
+              className="absolute top-[22%] right-[6%] size-[8%] rounded-full border-2 border-accent-red"
+            />
+            <span
+              aria-hidden
+              className="absolute top-[30%] left-[14%] size-2.5 rounded-full bg-accent-red"
+            />
+            <img
+              src={profile.cutout.src}
+              width={profile.cutout.width}
+              height={profile.cutout.height}
+              alt=""
+              loading="lazy"
+              className="absolute inset-x-[10%] bottom-0 w-[80%] [mask-image:radial-gradient(circle_at_50%_42%,#000_62%,transparent_63%)]"
+            />
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-export function Contact() {
-  const links = [
-    { label: "Email", value: profile.email, href: `mailto:${profile.email}`, Icon: Mail },
-    {
-      label: "LinkedIn",
-      value: profile.linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
-      href: profile.linkedin,
-      Icon: LinkedinIcon,
-    },
-    {
-      label: "GitHub",
-      value: profile.github.replace(/^https?:\/\//, ""),
-      href: profile.github,
-      Icon: GithubIcon,
-    },
-  ];
+/** Education & training, then professional experience. */
+export function Resume() {
   return (
-    <section id="contact" aria-labelledby="contact-title" className="stock py-24 sm:py-32">
-      <div className={`${wrap} grid gap-14 lg:grid-cols-12`}>
-        <div className="lg:col-span-7">
-          <h2 id="contact-title" className="font-cond text-[clamp(3rem,8vw,5.5rem)] text-ink">
-            Let's build <span className="text-punch">something great.</span>
-          </h2>
-          <p className="mt-6 max-w-[48ch] text-lg text-ink">
-            I'm open to frontend development opportunities, freelance projects, and collaborations.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
-            <LinkButton
-              href={`mailto:${profile.email}?subject=${encodeURIComponent("Let's work together")}`}
-              variant="dark"
-            >
-              Contact me
-            </LinkButton>
-            <LinkButton
-              href={cvHref}
-              variant="outlineInk"
-              {...(cv.available ? { download: cv.fileName } : {})}
-            >
-              {cv.available ? "Download CV" : "Request CV"}
-            </LinkButton>
+    <section id="experience" aria-labelledby="resume-title" className="pb-24">
+      <div className={wrap}>
+        <h2 id="resume-title" className="sr-only">
+          Resume
+        </h2>
+        <RuleHeading>Education</RuleHeading>
+        <ul className="grid gap-5 md:grid-cols-2">
+          {education.map((e) => (
+            <li key={e.title} className="rounded-[14px] bg-panel p-6">
+              <h3 className="text-[1.125rem]">{e.title}</h3>
+              <p className="mt-0.5 text-[0.9375rem] font-medium text-heading/80">{e.org}</p>
+              <p className="mt-1 font-display text-[0.9375rem] font-bold text-accent-red">
+                {e.period}
+              </p>
+              <p className="mt-3 text-[0.9375rem]">{e.text}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-20 grid items-center gap-12 lg:grid-cols-2">
+          <div className="overflow-hidden rounded-[18px] border bg-white">
+            <img
+              src={profile.studio.src}
+              width={profile.studio.width}
+              height={profile.studio.height}
+              alt={`Studio portrait of ${profile.name}`}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover object-top"
+            />
+          </div>
+          <div>
+            <RuleHeading>Experience</RuleHeading>
+            {experience.map((e) => (
+              <article key={e.company}>
+                <p className="font-display text-[0.9375rem] font-bold text-accent-red">
+                  {e.period}
+                </p>
+                <h3 className="mt-1 text-[1.5rem]">{e.company}</h3>
+                <p className="font-display text-[1.0625rem] font-semibold text-heading/85">
+                  {e.role}
+                </p>
+                <p className="mt-3">{e.description}</p>
+                <ul className="mt-5 space-y-2.5">
+                  {e.achievements.map((a) => (
+                    <li key={a} className="flex gap-3 text-heading/90">
+                      <span
+                        aria-hidden
+                        className="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent-red"
+                      />
+                      {a}
+                    </li>
+                  ))}
+                </ul>
+                <ul className="mt-6 flex flex-wrap gap-2" aria-label="Responsibilities">
+                  {e.responsibilities.map((r) => (
+                    <li key={r} className="rounded-full bg-panel-2 px-3.5 py-1 text-sm">
+                      {r}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
         </div>
-        <ul className="self-end lg:col-span-5">
-          {links.map(({ label, value, href, Icon }) => (
-            <li key={label} className="border-t border-ink/30 last:border-b">
-              <a
-                href={href}
-                {...(href.startsWith("http")
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className="group flex items-center gap-4 py-5 text-ink"
-              >
-                <Icon className="size-5 shrink-0" />
-                <span className="min-w-0 flex-1">
-                  <span className="label-cond block opacity-75">{label}</span>
-                  <span className="mt-1 block break-all font-semibold group-hover:underline">
-                    {value}
-                  </span>
+      </div>
+    </section>
+  );
+}
+
+/** Core stack as a bordered wordmark grid. */
+export function StackGrid() {
+  return (
+    <section aria-label="Core technologies" className="pb-24">
+      <ul className={`${wrap} grid grid-cols-2 sm:grid-cols-4`}>
+        {stackWordmarks.map((w) => (
+          <li
+            key={w}
+            className="-mt-px -ml-px flex h-28 items-center justify-center border font-display text-[clamp(1.5rem,2.4vw,2rem)] font-bold text-soft transition-colors hover:text-heading"
+          >
+            {w}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export function Skills() {
+  return (
+    <section id="skills" aria-labelledby="skills-title" className="py-24">
+      <div className={`${wrap} grid gap-12 lg:grid-cols-12`}>
+        <div className="lg:col-span-4">
+          <SectionTitle
+            id="skills-title"
+            kicker="My skills"
+            title="The toolkit behind every project"
+            intro="The technologies I use day to day to ship production interfaces."
+          />
+          <LinkButton
+            href={cvHref}
+            variant="outline"
+            {...(cv.available ? { download: cv.fileName } : {})}
+          >
+            {cv.available ? "Download CV" : "Request CV"}
+          </LinkButton>
+        </div>
+        <ul className="grid gap-5 sm:grid-cols-2 lg:col-span-8">
+          {skillGroups.map((g) => (
+            <li key={g.title} className="rounded-[14px] bg-panel p-6">
+              <div className="flex items-baseline justify-between gap-3">
+                <h3 className="text-[1.25rem]">{g.title}</h3>
+                <span className="font-display text-[0.9375rem] font-bold text-accent-red">
+                  {String(g.items.length).padStart(2, "0")}
                 </span>
-                <ArrowUpRight
-                  className="size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  aria-hidden
-                />
-              </a>
+              </div>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {g.items.map((s) => (
+                  <li key={s} className="rounded-full border px-3 py-1 text-sm text-heading/85">
+                    {s}
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>
@@ -256,34 +273,89 @@ export function Contact() {
   );
 }
 
-export function Footer() {
+/** Closing call to action, quick links and contact details. */
+export function Contact() {
+  const links = [
+    { label: profile.email, href: `mailto:${profile.email}`, Icon: Mail },
+    {
+      label: "linkedin.com/in/mahmoud-gamal-abdelsalam",
+      href: profile.linkedin,
+      Icon: LinkedinIcon,
+    },
+    { label: "github.com/roone858", href: profile.github, Icon: GithubIcon },
+    { label: `${profile.location} · Gulf & remote`, href: undefined, Icon: MapPin },
+  ];
   return (
-    <footer>
-      <div aria-hidden className="stock">
-        <div className="perf-x" />
-      </div>
-      <div className={`${wrap} flex flex-col items-center justify-between gap-4 py-8 sm:flex-row`}>
-        <p className="label-cond text-dim">
-          © {new Date().getFullYear()} {profile.name} · {profile.role} ·{" "}
-          <span className="text-flag">End of reel</span>
-        </p>
-        <div className="flex gap-2">
-          {[
-            { href: profile.github, label: "GitHub", Icon: GithubIcon },
-            { href: profile.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
-            { href: `mailto:${profile.email}`, label: "Email", Icon: Mail },
-          ].map(({ href, label, Icon }) => (
-            <a
-              key={label}
-              href={href}
-              aria-label={label}
-              {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="inline-flex size-11 items-center justify-center text-dim transition-colors hover:text-flag"
-            >
-              <Icon className="size-5" />
-            </a>
-          ))}
+    <footer id="contact" aria-labelledby="contact-title" className="rounded-t-[28px] bg-panel">
+      <div className={`${wrap} py-20`}>
+        <div className="flex flex-col items-start justify-between gap-8 border-b pb-14 md:flex-row md:items-center">
+          <div>
+            <p className="kicker">Contact</p>
+            <h2 id="contact-title" className="mt-3 text-[clamp(2.25rem,5vw,3.75rem)]">
+              Let's build something great
+            </h2>
+            <p className="mt-3 max-w-[52ch]">
+              I'm open to frontend development opportunities, freelance projects, and
+              collaborations.
+            </p>
+          </div>
+          <LinkButton
+            href={`mailto:${profile.email}?subject=${encodeURIComponent("Let's work together")}`}
+            className="shrink-0"
+          >
+            Contact me <ArrowUpRight className="size-4" aria-hidden />
+          </LinkButton>
         </div>
+
+        <div className="grid gap-12 pt-14 md:grid-cols-3">
+          <div>
+            <a href="#top" className="flex items-center gap-2.5" aria-label="Back to top">
+              <LogoMark />
+              <span className="font-display text-2xl font-bold text-heading">Mahmoud</span>
+            </a>
+            <p className="mt-4 max-w-[34ch]">{profile.positioning}</p>
+          </div>
+          <nav aria-label="Quick links">
+            <h3 className="text-[1.25rem]">Quick Links</h3>
+            <ul className="mt-4 grid grid-cols-2 gap-2">
+              {navLinks.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="hover:text-accent-red">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div>
+            <h3 className="text-[1.25rem]">Contact</h3>
+            <ul className="mt-4 space-y-3">
+              {links.map(({ label, href, Icon }) => (
+                <li key={label} className="flex items-center gap-3">
+                  <Icon className="size-4 shrink-0 text-accent-red" />
+                  {href ? (
+                    <a
+                      href={href}
+                      {...(href.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      className="break-all hover:text-accent-red"
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    <span>{label}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="border-t">
+        <p className={`${wrap} py-6 text-center text-sm`}>
+          © {new Date().getFullYear()} {profile.name} · {profile.role}. All rights reserved.
+        </p>
       </div>
     </footer>
   );

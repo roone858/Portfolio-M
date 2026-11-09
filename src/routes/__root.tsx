@@ -81,23 +81,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Mahmoud Gamal — Frontend Developer" },
       { name: "description", content: "Portfolio of Mahmoud Gamal, Frontend Developer (React, Angular, TypeScript)." },
       { name: "author", content: "Mahmoud Gamal" },
-      { name: "theme-color", content: "#0a0a0a" },
+      { name: "theme-color", content: "#0b0b0b" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,400..800&family=Noto+Kufi+Arabic:wght@600;800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Rubik:wght@400;500&family=Noto+Kufi+Arabic:wght@600&display=swap",
       },
       {
         rel: "stylesheet",
         href: appCss,
       },
       // ?v= busts browser favicon caches; bump it whenever the icons change.
-      { rel: "icon", href: "/favicon.ico?v=2", sizes: "any" },
-      { rel: "icon", href: "/icon-512.png?v=2", type: "image/png", sizes: "512x512" },
-      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=2" },
+      { rel: "icon", href: "/favicon.ico?v=3", sizes: "any" },
+      { rel: "icon", href: "/icon-512.png?v=3", type: "image/png", sizes: "512x512" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=3" },
     ],
   }),
   shellComponent: RootShell,

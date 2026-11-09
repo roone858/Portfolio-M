@@ -1,124 +1,103 @@
 import { ArrowUpRight } from "lucide-react";
 import { projects, type Project } from "@/content/portfolio";
-import { GithubIcon, LinkButton, SectionHead } from "./primitives";
-import { projectSlug } from "@/lib/utils";
+import { cn, projectSlug } from "@/lib/utils";
 
 export function Projects() {
   return (
-    <section id="projects" aria-labelledby="projects-title" className="py-24 sm:py-32">
+    <section
+      id="projects"
+      aria-labelledby="projects-title"
+      className="rounded-[28px] bg-panel py-24"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHead
-          id="projects-title"
-          title="Selected projects"
-          slate={`Work · ${projects.length} frames`}
-          intro="Real products I've worked on — from learning platforms to marketplaces and e-commerce."
-        />
-        <ol className="space-y-20 sm:space-y-28">
+        <p
+          aria-hidden
+          className="outline-text text-center font-display text-[clamp(3rem,11vw,9rem)] leading-none font-bold uppercase"
+        >
+          Latest Portfolio
+        </p>
+        <header className="mx-auto -mt-[clamp(1.5rem,4vw,3.5rem)] max-w-2xl text-center">
+          <h2 id="projects-title" className="text-[clamp(2rem,4vw,2.75rem)]">
+            Selected projects
+          </h2>
+          <p className="mt-3">
+            Real products I've worked on — from learning platforms to marketplaces and e-commerce.
+          </p>
+        </header>
+        <ul className="mt-16 grid gap-x-10 gap-y-14 md:grid-cols-2">
           {projects.map((p, i) => (
-            <li key={p.name}>
-              <ProjectFrame p={p} n={i + 1} />
+            <li key={p.name} className={cn(i % 2 === 1 && "md:mt-14")}>
+              <ProjectCard p={p} />
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
   );
 }
 
-function ProjectFrame({ p, n }: { p: Project; n: number }) {
-  const live = Boolean(p.liveUrl);
+function ProjectCard({ p }: { p: Project }) {
+  const Wrapper = p.liveUrl ? "a" : "div";
   return (
-    <article
-      id={`project-${projectSlug(p.name)}`}
-      className="group grid gap-8 lg:grid-cols-12 lg:gap-12"
-    >
-      <div className="lg:col-span-7">
-        <div className="stock rounded-[3px] px-[var(--pitch)]">
-          <div aria-hidden className="perf-x -mx-[var(--pitch)]" />
-          <Print p={p} />
-          <div aria-hidden className="perf-x -mx-[var(--pitch)]" />
+    <article id={`project-${projectSlug(p.name)}`}>
+      <Wrapper
+        {...(p.liveUrl ? { href: p.liveUrl, target: "_blank", rel: "noopener noreferrer" } : {})}
+        className="group block"
+      >
+        <div className="relative overflow-hidden rounded-[18px] border bg-[radial-gradient(120%_80%_at_80%_100%,oklch(0.42_0.16_25/55%),transparent_60%),var(--base)] p-6 pb-0 transition-colors group-hover:border-accent-red/50 sm:p-8 sm:pb-0">
+          <div className="flex items-start justify-between gap-4">
+            <p className="font-display text-[1.375rem] leading-tight font-bold text-heading">
+              {p.category}
+              <span className="block text-accent-red">{p.name}</span>
+            </p>
+            {p.liveUrl && (
+              <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-accent-red text-white transition-transform duration-300 group-hover:rotate-45">
+                <ArrowUpRight className="size-5" aria-hidden />
+              </span>
+            )}
+          </div>
+          <div className="mt-6 overflow-hidden rounded-t-[10px] border border-b-0">
+            {p.image ? (
+              <img
+                src={p.image}
+                alt={`Screenshot of the ${p.name} website`}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[16/10] w-full object-cover object-top transition-[object-position] duration-[6000ms] ease-linear group-hover:object-bottom motion-reduce:transition-none"
+              />
+            ) : (
+              <div className="flex aspect-[16/10] items-center justify-center bg-panel-2">
+                <span className="font-display text-3xl font-bold text-soft">{p.name}</span>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col lg:col-span-5 lg:pt-6">
-        <div className="flex items-center gap-3">
-          <span className="font-cond tabular text-5xl text-flag">{String(n).padStart(2, "0")}</span>
-          <span aria-hidden className="h-px flex-1 bg-border" />
-          <StatusMark live={live} />
-        </div>
-        <h3 className="font-cond mt-5 text-[clamp(2.25rem,4vw,3.25rem)]">{p.name}</h3>
-        <p className="label-cond mt-2 text-dim">{p.category}</p>
-        <p className="mt-5 text-edge">{p.description}</p>
-        <ul className="mt-6 grid gap-x-6 gap-y-2 sm:grid-cols-2">
-          {p.highlights.map((h) => (
-            <li key={h} className="flex items-baseline gap-2.5 text-[0.9375rem] text-dim">
-              <span aria-hidden className="size-1.5 shrink-0 translate-y-[-2px] bg-flag" />
-              {h}
+      </Wrapper>
+      <h3 className="mt-6 text-[1.5rem]">
+        {p.liveUrl ? (
+          <a
+            href={p.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-accent-red"
+          >
+            {p.name}
+          </a>
+        ) : (
+          p.name
+        )}
+      </h3>
+      <p className="mt-2">{p.description}</p>
+      {p.tech.length > 0 && (
+        <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies">
+          {p.tech.map((t) => (
+            <li key={t} className="rounded-full bg-panel-2 px-3 py-1 text-sm text-heading/85">
+              {t}
             </li>
           ))}
         </ul>
-        {p.tech.length > 0 && (
-          <p className="label-cond mt-6 text-edge">
-            <span className="sr-only">Technologies: </span>
-            {p.tech.join(" / ")}
-          </p>
-        )}
-        <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-3 pt-8">
-          <ProjectLinks p={p} />
-        </div>
-      </div>
+      )}
+      {!p.liveUrl && <p className="mt-3 text-sm text-soft">Case study coming soon</p>}
     </article>
-  );
-}
-
-/** Live = a taped band; no live link = a dashed outline. State is a mark, not a hue. */
-function StatusMark({ live }: { live: boolean }) {
-  return live ? (
-    <span className="label-cond stock rounded-[2px] px-2.5 py-1 text-[0.75rem]">Live</span>
-  ) : (
-    <span className="label-cond rounded-[2px] border border-dashed border-dim/60 px-2.5 py-1 text-[0.75rem] text-dim">
-      No print
-    </span>
-  );
-}
-
-function Print({ p }: { p: Project }) {
-  if (p.image)
-    return (
-      <div className="my-3 overflow-hidden rounded-[2px] bg-punch p-1">
-        <img
-          src={p.image}
-          alt={`Screenshot of the ${p.name} website`}
-          loading="lazy"
-          decoding="async"
-          className="aspect-[16/10] w-full object-cover object-top transition-[object-position] duration-[8000ms] ease-linear group-hover:object-bottom motion-reduce:transition-none motion-reduce:group-hover:object-top"
-        />
-      </div>
-    );
-  return (
-    <div className="my-3 bg-ink p-1 [clip-path:polygon(0_0,calc(100%-28px)_0,100%_28px,100%_100%,0_100%)]">
-      <div className="flex aspect-[16/10] flex-col items-center justify-center gap-2 bg-spool text-center">
-        <span className="font-cond text-3xl text-edge/80">{p.name}</span>
-        <span className="label-cond text-dim">No print yet</span>
-      </div>
-    </div>
-  );
-}
-
-function ProjectLinks({ p }: { p: Project }) {
-  if (!p.liveUrl && !p.githubUrl)
-    return <p className="label-cond text-dim">Case study coming soon</p>;
-  return (
-    <>
-      {p.liveUrl && (
-        <LinkButton href={p.liveUrl} target="_blank" rel="noopener noreferrer">
-          View project <ArrowUpRight className="size-4" aria-hidden />
-        </LinkButton>
-      )}
-      {p.githubUrl && (
-        <LinkButton href={p.githubUrl} target="_blank" rel="noopener noreferrer" variant="outline">
-          <GithubIcon /> GitHub
-        </LinkButton>
-      )}
-    </>
   );
 }

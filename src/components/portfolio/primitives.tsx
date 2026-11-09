@@ -1,25 +1,15 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
-import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Variant = "plate" | "outline" | "outlineInk" | "link" | "dark";
+type Variant = "primary" | "outline" | "ghost";
 const variants: Record<Variant, string> = {
-  // Primary: orange plate with sprocket holes punched at both ends.
-  plate: "holes-ends stock text-ink hover:bg-flag-deep active:translate-y-px px-9",
-  // Secondary: hairline plate on the bench, holes in orange.
-  outline:
-    "holes-ends border border-flag text-flag hover:bg-flag hover:text-ink active:translate-y-px px-9",
-  // Ink hairline plate, used on orange stock.
-  outlineInk:
-    "holes-ends border border-ink text-ink hover:bg-ink hover:text-flag active:translate-y-px px-9",
-  // Black plate, used on orange stock.
-  dark: "holes-ends bg-ink text-flag hover:bg-char active:translate-y-px px-9",
-  // Text action with a play marker.
-  link: "px-1 text-flag hover:text-edge",
+  primary: "bg-accent-red text-white hover:bg-red-deep",
+  outline: "border border-line bg-panel text-heading hover:border-accent-red hover:text-accent-red",
+  ghost: "text-heading hover:text-accent-red px-1",
 };
 
 export function LinkButton({
-  variant = "plate",
+  variant = "primary",
   className,
   children,
   ...props
@@ -27,64 +17,67 @@ export function LinkButton({
   return (
     <a
       className={cn(
-        "label-cond inline-flex min-h-12 items-center justify-center gap-2 rounded-[3px] text-[0.9375rem] transition-colors duration-150",
+        "inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 font-display text-base font-bold tracking-wide transition-colors duration-200",
         variants[variant],
         className,
       )}
       {...props}
     >
       {children}
-      {variant === "link" && <ChevronRight className="size-4" aria-hidden />}
     </a>
   );
 }
 
-/** Section head: a condensed heading on the left, the frame's slate on the right, a timecode ruler beneath. */
-export function SectionHead({
+/** Red kicker over a large heading, optionally centered with an intro line. */
+export function SectionTitle({
   id,
+  kicker,
   title,
-  slate,
   intro,
-  tone = "bench",
+  center = false,
 }: {
   id?: string;
+  kicker: string;
   title: ReactNode;
-  slate: string;
   intro?: string;
-  tone?: "bench" | "stock";
+  center?: boolean;
 }) {
   return (
-    <header className="mb-12 sm:mb-16">
-      <div className="flex items-end justify-between gap-6">
-        <h2 id={id} className="font-cond text-[clamp(2.75rem,7vw,5.5rem)]">
-          {title}
-        </h2>
-        <p
-          className={cn(
-            "label-cond tabular shrink-0 pb-2",
-            tone === "stock" ? "text-ink" : "text-dim",
-          )}
-        >
-          {slate}
-        </p>
-      </div>
-      <div
-        aria-hidden
-        className={cn("ruler mt-5", tone === "stock" ? "text-ink/60" : "text-edge/25")}
-      />
+    <header className={cn("mb-12", center && "mx-auto max-w-2xl text-center")}>
+      <p className="kicker">{kicker}</p>
+      <h2 id={id} className="mt-3 text-[clamp(2rem,4vw,2.75rem)]">
+        {title}
+      </h2>
       {intro && (
-        <p className={cn("mt-6 max-w-[60ch]", tone === "stock" ? "text-ink" : "text-dim")}>
-          {intro}
-        </p>
+        <p className={cn("mt-4", center ? "mx-auto max-w-[56ch]" : "max-w-[60ch]")}>{intro}</p>
       )}
     </header>
   );
 }
 
-/** A punched-white window: the only place running images sit. */
-export function Window({ children, className }: { children: ReactNode; className?: string }) {
+/** Small heading with a thin rule trailing it (Education, Experience). */
+export function RuleHeading({ id, children }: { id?: string; children: ReactNode }) {
   return (
-    <div className={cn("overflow-hidden rounded-[3px] bg-punch p-1.5", className)}>{children}</div>
+    <div className="mb-8 flex items-center gap-5">
+      <h3 id={id} className="text-[1.75rem]">
+        {children}
+      </h3>
+      <span aria-hidden className="flex w-14 items-center">
+        <span className="size-1.5 rounded-full bg-soft" />
+        <span className="h-px flex-1 bg-soft" />
+        <span className="size-1.5 rounded-full bg-soft" />
+      </span>
+    </div>
+  );
+}
+
+/** Brand mark: a red ring with an inner dot, beside the name. */
+export function LogoMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true" className={cn("size-8", className)}>
+      <circle cx="16" cy="16" r="12" fill="none" stroke="var(--red)" strokeWidth="5" />
+      <circle cx="16" cy="16" r="3.5" fill="var(--red)" />
+    </svg>
   );
 }
 

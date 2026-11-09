@@ -31,6 +31,7 @@ Frontend-focused full-stack developer: React, Angular, Next.js, and TypeScript o
 ## Brand Commitments
 
 - The monochrome portrait (`public/images/mahmoud-gamal.webp`, city skyline reflected in the sunglasses) must be used prominently.
+- Visual direction is user-pinned (2026-11-09): dark personal-portfolio layout modeled on the Reeni template's index-05 demo (near-black ground, charcoal cards, coral-red #FF4A4A accent, Rajdhani headings, Rubik body text, portrait over a red arch). This replaced the earlier cutting-bench direction.
 - The name is Mahmoud Gamal. The title is "Frontend Developer", with full-stack capability presented as supporting depth.
 
 ## Evidence on Hand
@@ -38,7 +39,9 @@ Frontend-focused full-stack developer: React, Angular, Next.js, and TypeScript o
 - Live projects with full-page screenshots: Learn at Dolphin, TARAF Furniture, Sukoon, and Tawba Islamic Center (`public/projects/*.webp`).
 - MITHAQ has no live link or screenshot.
 - Current role: Frontend Developer at ZonNet Digital Solutions, July 2025 to present.
-- There are no testimonials, client logos, or metrics. Do not invent any.
+- Figures from the CV (`public/cv/mahmoud-gamal-cv.pdf`): 4 years of experience; Dolphin serves 5,000+ students; the Teacher Dashboard improved instructor efficiency by 40%. Education and training: BSc Computer Science (Assiut University), DEPI, ITI, and Udacity.
+- There are no testimonials, client logos, pricing, or blog posts. Do not invent any.
+- The cutout portrait for the hero arch is `public/images/mahmoud-gamal-cutout.webp`. It was generated from the original photo with rembg (isnet-general-use).
 
 ## Product Principles
 

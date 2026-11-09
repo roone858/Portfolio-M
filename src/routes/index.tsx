@@ -2,7 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
 import { Projects } from "@/components/portfolio/Projects";
-import { About, Approach, Contact, Experience, Footer, Skills } from "@/components/portfolio/Sections";
+import {
+  About,
+  Approach,
+  Contact,
+  Resume,
+  Skills,
+  StackGrid,
+} from "@/components/portfolio/Sections";
 import { profile } from "@/content/portfolio";
 
 const title = "Mahmoud Gamal | Frontend Developer | React & Angular";
@@ -35,7 +42,11 @@ export const Route = createFileRoute("/")({
             sameAs: [profile.linkedin, profile.github],
             knowsAbout: ["React", "Angular", "TypeScript", "Next.js", "Frontend Development"],
           },
-          { "@context": "https://schema.org", "@type": "WebSite", name: `${profile.name} — Portfolio` },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: `${profile.name} — Portfolio`,
+          },
         ]),
       },
     ],
@@ -46,20 +57,23 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+      >
         Skip to content
       </a>
       <Navbar />
       <main id="main">
         <Hero />
         <About />
-        <Skills />
-        <Projects />
         <Approach />
-        <Experience />
-        <Contact />
+        <Resume />
+        <StackGrid />
+        <Projects />
+        <Skills />
       </main>
-      <Footer />
+      <Contact />
     </>
   );
 }

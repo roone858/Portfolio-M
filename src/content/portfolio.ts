@@ -9,18 +9,89 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/mahmoud-gamal-abdelsalam/",
   github: "https://github.com/roone858",
   photo: { src: "/images/mahmoud-gamal.webp", width: 800, height: 1067 },
+  /** Formal studio portrait (white background), used in the Experience section. */
+  studio: { src: "/images/mahmoud-gamal-studio.webp", width: 900, height: 900 },
+  /** Same portrait with a transparent background, for placing over the hero arch. */
+  cutout: { src: "/images/mahmoud-gamal-cutout.webp", width: 800, height: 1067 },
   positioning:
     "I build modern, responsive, and scalable web applications with a focus on clean architecture, performance, and exceptional user experience.",
 };
 
 export const hero = {
   status: "Open to frontend roles & freelance projects",
-  titleTop: "Frontend Developer",
-  titleBottom: "Building modern web experiences.",
+  greeting: "Hi, I am Mahmoud Gamal",
+  title: "a Frontend Developer",
   lede: "I build responsive, scalable, and user-focused web applications using React, Angular, TypeScript, and modern frontend technologies.",
   stack:
     "Full-stack capable: NestJS, Node.js, MongoDB and PostgreSQL behind the interface. Shipping in English and Arabic (RTL).",
 };
+
+// Figures come from the CV (public/cv/mahmoud-gamal-cv.pdf). Keep them in sync with it.
+export const heroStats = [
+  { value: "4+", label: "Years of experience" },
+  { value: "5", label: "Featured projects" },
+  { value: "2", label: "Languages shipped (EN · AR)" },
+];
+
+export const highlightStats = {
+  lead: {
+    value: "4+",
+    label: "Years of experience",
+    text: "Building responsive, scalable, production-ready web applications with React, TypeScript, Redux Toolkit, Next.js and Tailwind CSS.",
+  },
+  cards: [
+    { value: "5,000+", label: "Students on Dolphin" },
+    { value: "40%", label: "Instructor efficiency gain" },
+    { value: "30+", label: "Technologies in use" },
+    { value: "4", label: "Live websites" },
+  ],
+};
+
+export const services = [
+  { icon: "code", title: "Frontend Development", text: "React, Angular & Next.js" },
+  { icon: "server", title: "Backend & APIs", text: "NestJS, Node.js & REST" },
+  { icon: "languages", title: "Arabic (RTL) Interfaces", text: "Bilingual, right-to-left UI" },
+  { icon: "zap", title: "Real-time & Payments", text: "WebSockets, Stripe & OAuth" },
+] as const;
+
+export const education = [
+  {
+    title: "Bachelor of Computer Science",
+    org: "Assiut University",
+    period: "Graduated with Good Honors",
+    text: "Coursework in algorithms, data structures, database systems, and web development.",
+  },
+  {
+    title: "Angular Frontend Developer",
+    org: "Digital Egypt Pioneers Initiative (DEPI)",
+    period: "Jun 2025 – Dec 2025",
+    text: "Angular, TypeScript, Node.js, Express and MongoDB for scalable web applications, with responsive UI and RESTful APIs.",
+  },
+  {
+    title: "Front-End Cross Platform (ICC)",
+    org: "Information Technology Institute (ITI)",
+    period: "Jul 2023 – Nov 2023",
+    text: "Built “JUNO”, an interactive educational game, in an Agile team delivering a responsive cross-platform front end.",
+  },
+  {
+    title: "Advanced Full-Stack Web Development",
+    org: "Udacity",
+    period: "Oct 2022 – Feb 2023",
+    text: "Built and deployed a full-stack app on AWS with PostgreSQL, Express.js, JWT authentication, and CI/CD pipelines.",
+  },
+];
+
+/** Shown as a wordmark grid, in place of client logos. */
+export const stackWordmarks = [
+  "React",
+  "Angular",
+  "Next.js",
+  "TypeScript",
+  "NestJS",
+  "Node.js",
+  "MongoDB",
+  "PostgreSQL",
+];
 
 // CV served from public/cv/. Set `available: false` to make the CV buttons open an email request instead.
 // A full-stack variant also lives at /cv/mahmoud-gamal-fullstack-cv.pdf (not linked from the site).
@@ -178,6 +249,10 @@ export const experience = [
     period: "July 2025 – Present",
     description:
       "Developing modern frontend experiences for educational platforms using React, TypeScript, and Tailwind CSS.",
+    achievements: [
+      "Developed Dolphin, an online education platform serving 5,000+ students.",
+      "Engineered a Teacher Dashboard that increased instructor efficiency by 40% through automated progress tracking.",
+    ],
     responsibilities: [
       "Building responsive interfaces",
       "Developing reusable components",
@@ -204,8 +279,8 @@ export const approach = [
 
 export const navLinks = [
   { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Resume" },
   { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
+  { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ];
