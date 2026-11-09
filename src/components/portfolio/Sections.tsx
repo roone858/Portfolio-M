@@ -176,7 +176,10 @@ export function Resume() {
           <div>
             <RuleHeading>Experience</RuleHeading>
             {experience.map((e) => (
-              <article key={e.company}>
+              <article
+                key={e.company}
+                className="border-t pt-8 first-of-type:border-t-0 first-of-type:pt-0 [&+&]:mt-8"
+              >
                 <p className="font-display text-[0.9375rem] font-bold text-accent-red">
                   {e.period}
                 </p>

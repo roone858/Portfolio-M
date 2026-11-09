@@ -29,7 +29,7 @@ export const hero = {
 // Figures come from the CV (public/cv/mahmoud-gamal-cv.pdf). Keep them in sync with it.
 export const heroStats = [
   { value: "4+", label: "Years of experience" },
-  { value: "5", label: "Featured projects" },
+  { value: "6", label: "Featured projects" },
   { value: "2", label: "Languages shipped (EN · AR)" },
 ];
 
@@ -42,7 +42,7 @@ export const highlightStats = {
   cards: [
     { value: "5,000+", label: "Students on Dolphin" },
     { value: "40%", label: "Instructor efficiency gain" },
-    { value: "30+", label: "Technologies in use" },
+    { value: "35+", label: "Technologies in use" },
     { value: "4", label: "Live websites" },
   ],
 };
@@ -113,24 +113,27 @@ export const skillGroups = [
       "React",
       "Angular",
       "Next.js",
+      "TanStack Start",
+      "TanStack Router",
       "TypeScript",
       "JavaScript",
       "HTML5",
       "CSS3",
       "Tailwind CSS",
+      "Design Systems",
     ],
   },
   {
     title: "Backend",
     icon: "server",
-    items: ["Node.js", "Express.js", "NestJS", "OAuth", "Stripe"],
+    items: ["Node.js", "Express.js", "NestJS", "PHP", "OAuth", "Stripe"],
   },
   {
     title: "Databases",
     icon: "database",
-    items: ["MongoDB", "Mongoose", "PostgreSQL", "Prisma", "SQL"],
+    items: ["MongoDB", "Mongoose", "PostgreSQL", "MySQL", "Prisma", "SQL"],
   },
-  { title: "State Management", icon: "layers", items: ["Redux Toolkit"] },
+  { title: "State Management", icon: "layers", items: ["Redux Toolkit", "TanStack Query"] },
   {
     title: "API & Integration",
     icon: "plug",
@@ -159,6 +162,23 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: "Mohamed Farghaly — Math Teacher",
+    category: "Personal Website",
+    description:
+      "An Arabic (RTL) personal website for a mathematics teacher, presenting his teaching approach, qualifications, experience, and subjects, with WhatsApp lesson booking.",
+    tech: [],
+    highlights: [
+      "RTL Arabic interface",
+      "WhatsApp lesson booking",
+      "Qualifications & experience",
+      "Subjects overview",
+      "Responsive design",
+    ],
+    preview: "edu",
+    image: "/projects/mohamed-gom3a.webp",
+    liveUrl: "https://mohamed-gom3a.vercel.app/",
+  },
+  {
     name: "Learn at Dolphin",
     category: "Educational Platform",
     description:
@@ -172,8 +192,6 @@ export const projects: Project[] = [
       "Reusable components",
     ],
     preview: "edu",
-    image: "/projects/dolphin.webp",
-    liveUrl: "https://app.learnatdolphin.com/",
   },
   {
     name: "MITHAQ",
@@ -261,6 +279,24 @@ export const experience = [
       "Implementing authentication workflows",
       "Improving UI consistency and maintainability",
       "Working with real-time communication features",
+    ],
+  },
+  {
+    role: "Full-Stack Developer",
+    company: "Freelance",
+    period: "3 years · 2023 – Present",
+    description:
+      "Designing and building websites and web applications for clients, from the first requirements call to deployment and support.",
+    achievements: [
+      "Delivered e-commerce stores, organization websites, and a classified marketplace for clients.",
+      "Built bilingual English and Arabic (RTL) interfaces with responsive, SEO-friendly layouts.",
+    ],
+    responsibilities: [
+      "Client requirements & scoping",
+      "UI implementation",
+      "Backend & API development",
+      "Payments & integrations",
+      "Deployment & maintenance",
     ],
   },
 ];
