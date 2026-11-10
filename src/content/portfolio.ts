@@ -14,16 +14,16 @@ export const profile = {
   /** Same portrait with a transparent background, for placing over the hero arch. */
   cutout: { src: "/images/mahmoud-gamal-cutout.webp", width: 800, height: 1067 },
   positioning:
-    "I build modern, responsive, and scalable web applications with a focus on clean architecture, performance, and exceptional user experience.",
+    "I don't just write code — I build digital products and experiences people actually use, with clean architecture and real attention to performance.",
 };
 
 export const hero = {
   status: "Open to frontend roles & freelance projects",
-  greeting: "Hi, I am Mahmoud Gamal",
-  title: "a Frontend Developer",
-  lede: "I build responsive, scalable, and user-focused web applications using React, Angular, TypeScript, and modern frontend technologies.",
+  greeting: "Hi, I'm Mahmoud Gamal, a Software Engineer",
+  title: "You Imagine It. I Build It.",
+  lede: "I turn ideas into scalable software solutions, powerful applications, and meaningful digital experiences.",
   stack:
-    "Full-stack capable: NestJS, Node.js, MongoDB and PostgreSQL behind the interface. Shipping in English and Arabic (RTL).",
+    "Full-stack capable: NestJS, Node.js, PHP, MongoDB, PostgreSQL, MySQL and MariaDB behind the interface, plus deployment and DevOps. Shipping in English and Arabic (RTL).",
 };
 
 // Figures come from the CV (public/cv/mahmoud-gamal-cv.pdf). Keep them in sync with it.
@@ -37,7 +37,7 @@ export const highlightStats = {
   lead: {
     value: "4+",
     label: "Years of experience",
-    text: "Building responsive, scalable, production-ready web applications with React, TypeScript, Redux Toolkit, Next.js and Tailwind CSS.",
+    text: "Building responsive, scalable, production-ready web applications with React, Angular, Next.js, TypeScript, Redux Toolkit, TanStack and Tailwind CSS.",
   },
   cards: [
     { value: "5,000+", label: "Students on Dolphin" },
@@ -131,7 +131,7 @@ export const skillGroups = [
   {
     title: "Databases",
     icon: "database",
-    items: ["MongoDB", "Mongoose", "PostgreSQL", "MySQL", "Prisma", "SQL"],
+    items: ["MongoDB", "Mongoose", "PostgreSQL", "MySQL", "MariaDB", "Prisma", "SQL"],
   },
   { title: "State Management", icon: "layers", items: ["Redux Toolkit", "TanStack Query"] },
   {

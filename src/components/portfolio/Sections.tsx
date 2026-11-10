@@ -40,7 +40,6 @@ export function About() {
             return (
               <li
                 key={s.title}
-                data-reveal
                 className="group rounded-[14px] border border-accent-red/15 bg-base px-3 py-7 text-center sm:px-6 sm:py-9 transition-colors hover:border-accent-red/60"
               >
                 <Icon className="mx-auto size-10 text-accent-red" strokeWidth={1.5} aria-hidden />
@@ -52,10 +51,7 @@ export function About() {
         </ul>
 
         <div className="mt-16 grid gap-5 lg:grid-cols-2">
-          <div
-            data-reveal
-            className="flex flex-col justify-center rounded-[18px] bg-panel p-8 sm:p-10"
-          >
+          <div className="flex flex-col justify-center rounded-[18px] bg-panel p-8 sm:p-10">
             <div className="flex items-center gap-6">
               <span className="font-display text-[clamp(5rem,10vw,8rem)] leading-[0.85] font-bold text-accent-red">
                 {lead.value}
@@ -71,7 +67,6 @@ export function About() {
             {cards.map((c) => (
               <div
                 key={c.label}
-                data-reveal
                 className="flex flex-col items-center justify-center rounded-[18px] bg-panel px-4 py-8 text-center"
               >
                 <dt className="sr-only">{c.label}</dt>
@@ -103,7 +98,7 @@ export function Approach() {
         <div className="grid items-center gap-12 lg:grid-cols-12">
           <ol className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
             {approach.map((s, i) => (
-              <li key={s.title} data-reveal className="rounded-[14px] bg-panel p-6">
+              <li key={s.title} className="rounded-[14px] bg-panel p-6">
                 <h3 className="text-[1.25rem]">
                   <span className="mr-2">{String(i + 1).padStart(2, "0")}.</span>
                   {s.title}
@@ -112,10 +107,7 @@ export function Approach() {
               </li>
             ))}
           </ol>
-          <div
-            data-reveal
-            className="relative mx-auto aspect-square w-full max-w-[26rem] lg:col-span-5"
-          >
+          <div className="relative mx-auto aspect-square w-full max-w-[26rem] lg:col-span-5">
             <div aria-hidden className="absolute inset-[8%] rounded-full bg-panel" />
             <div
               aria-hidden
@@ -159,7 +151,7 @@ export function Resume() {
         <RuleHeading>Education</RuleHeading>
         <ul className="grid gap-5 md:grid-cols-2">
           {education.map((e) => (
-            <li key={e.title} data-reveal className="rounded-[14px] bg-panel p-6">
+            <li key={e.title} className="rounded-[14px] bg-panel p-6">
               <h3 className="text-[1.125rem]">{e.title}</h3>
               <p className="mt-0.5 text-[0.9375rem] font-medium text-heading/80">{e.org}</p>
               <p className="mt-1 font-display text-[0.9375rem] font-bold text-accent-red">
@@ -171,7 +163,7 @@ export function Resume() {
         </ul>
 
         <div className="mt-20 grid items-center gap-12 lg:grid-cols-2">
-          <div data-reveal className="overflow-hidden rounded-[18px] border bg-white">
+          <div className="overflow-hidden rounded-[18px] border bg-white">
             <img
               src={profile.studio.src}
               width={profile.studio.width}
@@ -186,7 +178,6 @@ export function Resume() {
             {experience.map((e) => (
               <article
                 key={e.company}
-                data-reveal
                 className="border-t pt-8 first-of-type:border-t-0 first-of-type:pt-0 [&+&]:mt-8"
               >
                 <p className="font-display text-[0.9375rem] font-bold text-accent-red">
@@ -232,7 +223,6 @@ export function StackGrid() {
         {stackWordmarks.map((w) => (
           <li
             key={w}
-            data-reveal
             className="-mt-px -ml-px flex h-28 items-center justify-center border font-display text-[clamp(1.5rem,2.4vw,2rem)] font-bold text-soft transition-colors hover:text-heading"
           >
             {w}
@@ -264,7 +254,7 @@ export function Skills() {
         </div>
         <ul className="grid gap-5 sm:grid-cols-2 lg:col-span-8">
           {skillGroups.map((g) => (
-            <li key={g.title} data-reveal className="rounded-[14px] bg-panel p-6">
+            <li key={g.title} className="rounded-[14px] bg-panel p-6">
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="text-[1.25rem]">{g.title}</h3>
                 <span className="font-display text-[0.9375rem] font-bold text-accent-red">
@@ -301,10 +291,7 @@ export function Contact() {
   return (
     <footer id="contact" aria-labelledby="contact-title" className="rounded-t-[28px] bg-panel">
       <div className={`${wrap} py-20`}>
-        <div
-          data-reveal
-          className="flex flex-col items-start justify-between gap-8 border-b pb-14 md:flex-row md:items-center"
-        >
+        <div className="flex flex-col items-start justify-between gap-8 border-b pb-14 md:flex-row md:items-center">
           <div>
             <p className="kicker">Contact</p>
             <h2 id="contact-title" className="mt-3 text-[clamp(2.25rem,5vw,3.75rem)]">
