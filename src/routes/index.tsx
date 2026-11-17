@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
+import { Mindset } from "@/components/portfolio/Mindset";
 import { Projects } from "@/components/portfolio/Projects";
 import {
   About,
@@ -67,6 +68,7 @@ function Index() {
       <main id="main">
         <Hero />
         <About />
+        <Mindset />
         <Approach />
         <Resume />
         <StackGrid />

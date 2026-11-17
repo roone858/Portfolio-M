@@ -301,6 +301,79 @@ export const experience = [
   },
 ];
 
+export type MindsetStage = {
+  id: string;
+  index: string;
+  label: string;
+  title: string;
+  description: string;
+  concepts: readonly string[];
+  icon: "brain" | "layers" | "rocket";
+};
+
+/** The three macro stages of the product lifecycle, shown in the building-mindset section. */
+export const mindset: {
+  kicker: string;
+  title: string;
+  intro: string;
+  note: string;
+  stages: readonly MindsetStage[];
+} = {
+  kicker: "The building mindset",
+  title: "I build more than just software.",
+  intro: "I turn complex ideas into meaningful digital experiences.",
+  note: "From first principles to production",
+  stages: [
+    {
+      id: "think",
+      index: "01",
+      label: "Think",
+      title: "Understand Before Building.",
+      description:
+        "Every great product starts with understanding the problem, exploring possibilities, and designing the right technical foundation.",
+      concepts: [
+        "Problem Solving",
+        "System Architecture",
+        "Technical Decisions",
+        "Product Thinking",
+      ],
+      icon: "brain",
+    },
+    {
+      id: "engineer",
+      index: "02",
+      label: "Engineer",
+      title: "Turn Ideas Into Reality.",
+      description:
+        "I engineer scalable, maintainable digital products using modern technologies and thoughtful engineering practices.",
+      concepts: [
+        "Frontend Engineering",
+        "Backend Integration",
+        "Mobile Development",
+        "Clean Architecture",
+        "AI-Assisted Development",
+      ],
+      icon: "layers",
+    },
+    {
+      id: "deliver",
+      index: "03",
+      label: "Deliver",
+      title: "Build. Optimize. Ship.",
+      description:
+        "A product isn't finished when the code works. It's finished when it delivers value, performs reliably, and creates a great user experience.",
+      concepts: [
+        "Performance Optimization",
+        "Testing & Quality",
+        "Deployment",
+        "Scalability",
+        "Continuous Improvement",
+      ],
+      icon: "rocket",
+    },
+  ],
+};
+
 export const approach = [
   {
     title: "Understand",
